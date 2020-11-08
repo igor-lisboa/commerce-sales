@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalesCancellationsTable extends Migration
+class CreateProductSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSalesCancellationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales_cancellations', function (Blueprint $table) {
+        Schema::create('product_suppliers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sale_id')->references('id')->on('sales');
-            $table->foreignId('manager_id')->references('id')->on('managers');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateSalesCancellationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_cancellations');
+        Schema::dropIfExists('product_suppliers');
     }
 }

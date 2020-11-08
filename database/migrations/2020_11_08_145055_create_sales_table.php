@@ -15,6 +15,10 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->integer('payed_cents')->default(0);
+            $table->foreignId('cashier_id')->references('id')->on('cashiers');
+            $table->foreignId('client_id')->references('id')->on('clients');
+            $table->foreignId('payment_type_id')->references('id')->on('payment_types')->nullable();
             $table->timestamps();
         });
     }

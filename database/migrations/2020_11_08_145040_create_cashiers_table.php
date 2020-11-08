@@ -15,6 +15,7 @@ class CreateCashiersTable extends Migration
     {
         Schema::create('cashiers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

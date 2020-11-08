@@ -15,6 +15,8 @@ class CreateClaimsTable extends Migration
     {
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->references('id')->on('clients');
+            $table->longText('claim');
             $table->timestamps();
         });
     }

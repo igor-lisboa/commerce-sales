@@ -29,6 +29,10 @@ php artisan make:model PaymentType -m
 ```sh
 php artisan make:model Sale -m
 ```
+* Incluindo model com migrate dos fornecedores
+```sh
+php artisan make:model ProductSupplier -m
+```
 * Incluindo model com migrate de Produtos
 ```sh
 php artisan make:model Product -m

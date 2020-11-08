@@ -15,6 +15,10 @@ class CreateProductExchangesTable extends Migration
     {
         Schema::create('product_exchanges', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->references('id')->on('clients');
+            $table->foreignId('product_in_id')->references('id')->on('products');
+            $table->foreignId('product_out_id')->references('id')->on('products');
+            $table->foreignId('cashier_id')->references('id')->on('cashiers');
             $table->timestamps();
         });
     }
