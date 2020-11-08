@@ -1,5 +1,11 @@
 # [TCC00338 - PROJETO DE SOFTWARE - A1 | Trabalho Final](https://classroom.google.com/u/1/c/MTIxMTY2OTI0MTkw/a/MTUwMzAyNzIyNDQ5/details)
 
+## Dependencias do projeto
+* [Node.JS](https://nodejs.org/)
+* [Composer](https://getcomposer.org/)
+* [MySql](https://www.mysql.com/)
+* [PHP](https://www.php.net/)
+
 ## Passo a passo do projeto
 * Instalação do Laravel
 ```sh
@@ -65,6 +71,14 @@ php artisan make:seeder UserSeeder
 ## Para rodar o projeto localmente
 
 ### Se for a primeira vez
+* Instale as depêndencias do composer
+```sh
+composer install
+```
+* Instale as depêndencias do node
+```sh
+npm install
+```
 * Copie o `.env.example` e renomeie para `.env` para definir as variáveis de ambiente
 ```sh
 cp .env.example .env
