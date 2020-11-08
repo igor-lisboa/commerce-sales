@@ -1,6 +1,6 @@
 # [TCC00338 - PROJETO DE SOFTWARE - A1 | Trabalho Final](https://classroom.google.com/u/1/c/MTIxMTY2OTI0MTkw/a/MTUwMzAyNzIyNDQ5/details)
 
-## Dependencias do projeto
+## Dependências do projeto
 * [Node.JS](https://nodejs.org/)
 * [Composer](https://getcomposer.org/)
 * [MySql](https://www.mysql.com/)
