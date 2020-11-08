@@ -53,3 +53,32 @@ php artisan make:model Claim -m
 ```sh
 php artisan make:model SalesCancellation -m
 ```
+* Incluindo seeder do usuário
+```sh
+php artisan make:seeder UserSeeder
+```
+
+## Para rodar o projeto localmente
+
+### Se for a primeira vez
+* Copie o `.env.example` e renomeie para `.env` para definir as variáveis de ambiente
+```sh
+cp .env.example .env
+```
+* Rode o migrate com o seed
+```sh
+php artisan migrate --seed
+```
+* Inicie a aplicação
+```sh
+php artisan serve
+```
+### Se não for a primeira vez
+* Rode o migrate com o seed para verificar se tem alguma alteração a ser feita no banco
+```sh
+php artisan migrate --seed
+```
+* Inicie a aplicação
+```sh
+php artisan serve
+```
