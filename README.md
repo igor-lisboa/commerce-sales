@@ -49,3 +49,7 @@ php artisan make:model ProductExchange -m
 ```sh
 php artisan make:model Claim -m
 ```
+* Incluindo model com migrate de Cancelamento de Vendas
+```sh
+php artisan make:model SalesCancellation -m
+```
