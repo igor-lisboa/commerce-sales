@@ -19,6 +19,7 @@ class CreateProductExchangesTable extends Migration
             $table->foreignId('product_in_id')->references('id')->on('products');
             $table->foreignId('product_out_id')->references('id')->on('products');
             $table->foreignId('cashier_id')->references('id')->on('cashiers');
+            $table->integer('diff_price_cents');
             $table->timestamps();
         });
     }

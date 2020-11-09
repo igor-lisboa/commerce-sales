@@ -15,7 +15,7 @@ class CreateSalesCancellationsTable extends Migration
     {
         Schema::create('sales_cancellations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sale_id')->references('id')->on('sales');
+            $table->foreignId('sale_id')->references('id')->on('sales')->uniqid();
             $table->foreignId('manager_id')->references('id')->on('managers');
             $table->timestamps();
         });
