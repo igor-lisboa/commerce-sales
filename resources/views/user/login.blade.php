@@ -14,8 +14,8 @@
     <fieldset>
         <h2>Login</h2>
         @csrf
-        <input placeholder="E-Mail" type="email" name="email" required value="<?= old('email') ?>" />
-        <input placeholder="Senha" type="password" name="password" required value="<?= old('password') ?>" />
+        <input placeholder="E-Mail" autocomplete="username" type="email" name="email" required value="<?= old('email') ?>" />
+        <input placeholder="Senha" autocomplete="current-password" type="password" name="password" required value="<?= old('password') ?>" />
         <label for="remember">
             <input type="checkbox" name="remember" id="remember" value="1" <?= (old('remember') ? 'checked' : '') ?> />
             <span>Lembrar</span>
@@ -28,8 +28,8 @@
         <h2>Registro</h2>
         @csrf
         <input placeholder="Nome" type="text" name="name" required value="<?= old('name') ?>" />
-        <input placeholder="E-Mail" type="email" name="email" required value="<?= old('email') ?>" />
-        <input placeholder="Senha" type="password" name="password" required value="<?= old('password') ?>" />
+        <input placeholder="E-Mail" autocomplete="username" type="email" name="email" required value="<?= old('email') ?>" />
+        <input placeholder="Senha" autocomplete="current-password" type="password" name="password" required value="<?= old('password') ?>" />
         <button type="submit">Registrar</button>
     </fieldset>
 </form>

@@ -8,6 +8,9 @@
     <meta name="author" content="Caio Wey, Igor Lisboa">
     <title>{{env('APP_NAME')}}</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -47,7 +50,26 @@
     </main>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            setInterval(keepTokenAlive, 1000 * 60 * 15 ); // every 15 mins
+
+            function keepTokenAlive() {
+                $.ajax({
+                    url: '/keep-token-alive', //https://stackoverflow.com/q/31449434/470749
+                    method: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                }).then(function(result) {
+                    console.log(new Date() + $('meta[name="csrf-token"]').attr('content'));
+                });
+            }
+
+        });
+    </script>
 </body>
 
 </html>

@@ -23,9 +23,9 @@ class BaseService
      *
      * @return array
      */
-    public function index()
+    public function index($perPage = 5, $pageName = "page", $page = 1)
     {
-        return $this->model::get();
+        return $this->model::paginate($perPage, ['*'], $pageName, $page);
     }
 
     /**

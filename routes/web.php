@@ -27,4 +27,8 @@ Route::middleware(['authenticator'])->group(function () {
     Route::get('/home', function () {
         return view('home');
     })->name('home');
+
+    Route::post('keep-token-alive', function () {
+        return 'Token must have been valid, and the session expiration has been extended.'; //https://stackoverflow.com/q/31449434/470749
+    });
 });
