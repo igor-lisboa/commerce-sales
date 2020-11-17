@@ -17,9 +17,9 @@ class Authenticator
      */
     public function handle(Request $request, Closure $next)
     {
-        // se n esta logado entao redireciona p entrar
+        // se n esta logado entao redireciona p login
         if (!Auth::check()) {
-            return redirect()->route('entrar');
+            return redirect()->route('login');
         }
 
         return $next($request);

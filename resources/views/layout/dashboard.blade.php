@@ -25,15 +25,19 @@
                         <a class="nav-link" href="<?= route('home') ?>">Home</a>
                     </li>
                 </ul>
+                @auth
                 <form method="POST" class="form-inline mt-2 mt-md-0" onsubmit="return confirm('<?= __('msg_logout_confirm') ?>')" action="<?= route('logout') ?>">
                     @csrf
                     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Sair</button>
                 </form>
+                @else
+                <a class="btn btn-outline-info my-2 my-sm-0" href="<?= route('login') ?>">Login</a>
+                @endif
             </div>
         </nav>
     </header>
 
-    <main role="main">
+    <main role="main" style="margin-top: 100px;">
         @yield('content')
         <!-- FOOTER -->
         <footer class="container">

@@ -1,3 +1,6 @@
+@extends('layout.dashboard')
+
+@section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -30,3 +33,4 @@
         <button type="submit">Registrar</button>
     </fieldset>
 </form>
+@endsection
