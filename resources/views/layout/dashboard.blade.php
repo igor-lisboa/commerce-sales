@@ -21,14 +21,14 @@
             </button>
             <div class="navbar-collapse collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item @if(request()->routeIs('home')) active @endif">
+                    <li class="nav-item <?= (request()->routeIs('home') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('home') ?>">Home</a>
                     </li>
                 </ul>
                 @auth
                 <form method="POST" class="form-inline mt-2 mt-md-0" onsubmit="return confirm('<?= __('msg_logout_confirm') ?>')" action="<?= route('logout') ?>">
                     @csrf
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Sair</button>
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">{{auth()->user()->name}} - Sair</button>
                 </form>
                 @else
                 <a class="btn btn-outline-info my-2 my-sm-0" href="<?= route('login') ?>">Login</a>
