@@ -54,7 +54,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            setInterval(keepTokenAlive, 1000 * 60 * 15 ); // every 15 mins
+            setInterval(keepTokenAlive, 1000 * 60 * 15); // every 15 mins
 
             function keepTokenAlive() {
                 $.ajax({
@@ -65,6 +65,8 @@
                     }
                 }).then(function(result) {
                     console.log(new Date() + $('meta[name="csrf-token"]').attr('content'));
+                }).fail(function(err) {
+                    window.location.reload();
                 });
             }
 
