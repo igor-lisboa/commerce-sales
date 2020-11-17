@@ -1,0 +1,9 @@
+{
+    "msg_invalid_credentials": "Usuário e/ou senha incorretos",
+    "user_email_email": "Informe um E-Mail válido.",
+    "user_email_required": "Informe um E-Mail.",
+    "user_password_required": "Informe sua senha.",
+    "user_remember_boolean": "Lembre de mim precisa ser booleano.",
+    "user_name_required": "Informe um Nome.",
+    "msg_logout_confirm": "Tem certeza que deseja sair?"
+}
