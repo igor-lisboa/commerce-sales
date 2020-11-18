@@ -14,6 +14,11 @@ class UserUpdatePassword extends FormRequest
      */
     public function authorize()
     {
+        // if there isn't any logged user the token will be authorized
+        if (auth()->user() == null) {
+            return true;
+        }
+        // check if the token is from logged user
         return (request()->route('token') == auth()->user()->remember_token);
     }
 
@@ -43,7 +48,7 @@ class UserUpdatePassword extends FormRequest
         ];
     }
 
-     /**
+    /**
      * Get the error messages for the defined validation rules.
      *
      * @return array
@@ -52,7 +57,7 @@ class UserUpdatePassword extends FormRequest
     {
         return [
             'password.required' => __("user_password_required"),
-            'confirm_password.same'=>__("user_new_password_same_confirm_password")
+            'confirm_password.same' => __("user_new_password_same_confirm_password")
         ];
     }
 }
