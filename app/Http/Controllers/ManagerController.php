@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Manager as RequestsManager;
 use App\Models\Manager;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Services\ManagerService;
 
 class ManagerController extends Controller
 {
+    private $managerService;
+
+    public function __construct(ManagerService $managerService)
+    {
+        $this->managerService = $managerService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,72 +23,55 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        //
+        // if the logged user isn't one manager redirect to home
+        if (auth()->user()->manager == null) {
+            return redirect()->route('home');
+        }
+        return view('manager.index', ['managers' => $this->managerService->index()]);
     }
 
     /**
-     * Show the form for creating a new resource.
      *
+     * @param  \App\Http\Requests\Manager  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(RequestsManager $request)
     {
-        //
+        // if the logged user isn't one manager redirect to home
+        if (auth()->user()->manager == null) {
+            return redirect()->route('home');
+        }
+        return view('manager.create', ['usersNotManagers' => User::whereDoesntHave('manager')->get()]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage and use the RequestsManager to verify if the logged user can do it
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Manager  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestsManager $request)
     {
-        //
+        $this->managerService->store($request->validated());
+        return redirect()->route('manager.index');
     }
 
     /**
-     * Display the specified resource.
+     * Remove the specified resource from storage and use the RequestsManager to verify if the logged user can do it
      *
+     * @param  \App\Http\Requests\Manager  $request
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function show(Manager $manager)
+    public function destroy(RequestsManager $request, Manager $manager)
     {
-        //
-    }
+        // set the manager model as manager service's model 
+        $this->managerService->setModel($manager);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Manager  $manager
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Manager $manager)
-    {
-        //
-    }
+        // destroy from db this manager register
+        $this->managerService->destroy();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Manager  $manager
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Manager $manager)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Manager  $manager
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Manager $manager)
-    {
-        //
+        // redirect back to manager index page
+        return redirect()->route('manager.index');
     }
 }

@@ -67,6 +67,6 @@ class BaseService
      */
     public function destroy()
     {
-        return $this->model::delete();
+        return $this->model->delete();
     }
 }

@@ -7,7 +7,6 @@ use App\Http\Requests\UserRegister;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -76,17 +75,6 @@ class UserController extends Controller
     public function store(UserRegister $request)
     {
         return $this->userService->register($request->name, $request->email, $request->password);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
     }
 
     /**

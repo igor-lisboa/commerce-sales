@@ -5,5 +5,8 @@
     "user_password_required": "Informe sua senha.",
     "user_remember_boolean": "Lembre de mim precisa ser booleano.",
     "user_name_required": "Informe um Nome.",
-    "msg_logout_confirm": "Tem certeza que deseja sair?"
+    "msg_logout_confirm": "Tem certeza que deseja sair?",
+    "manager_msg_confirm_destroy": "Tem certeza que deseja remover :manager da gerência?",
+    "manager_user_id_required": "Informe um usuário.",
+    "manager_user_id_unique": "Esse usuário já é gerente."
 }

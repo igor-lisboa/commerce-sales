@@ -27,6 +27,13 @@
                     <li class="nav-item <?= (request()->routeIs('home') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('home') ?>">Home</a>
                     </li>
+                    @auth
+                    @if(auth()->user()->manager)
+                    <li class="nav-item <?= (request()->routeIs('manager.index') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('manager.index') ?>">Gerentes</a>
+                    </li>
+                    @endif
+                    @endif
                 </ul>
                 @auth
                 <form method="POST" class="form-inline mt-2 mt-md-0" onsubmit="return confirm('<?= __('msg_logout_confirm') ?>')" action="<?= route('logout') ?>">
@@ -41,6 +48,15 @@
     </header>
 
     <main role="main" style="margin-top: 100px;">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         @yield('content')
         <!-- FOOTER -->
         <footer class="container">
