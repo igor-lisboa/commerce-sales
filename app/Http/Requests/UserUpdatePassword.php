@@ -25,7 +25,6 @@ class UserUpdatePassword extends FormRequest
     public function rules()
     {
         return [
-            'old_password' => [new MatchOldPassword],
             'password' => ['required'],
             'confirm_password' => ['same:password'],
         ];
@@ -39,7 +38,6 @@ class UserUpdatePassword extends FormRequest
     public function attributes()
     {
         return [
-            'old_password' => __('old_password'),
             'password' => __('password'),
             'confirm_password' => __('confirm_password'),
         ];

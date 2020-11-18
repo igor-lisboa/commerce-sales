@@ -13,7 +13,6 @@
     "change_password_email_subject": "Solicitação de mudança de senha",
     "msg_change_password_mail_send": "Será enviado um email para seu email cadastrando contendo o link para atualização da senha.",
     "Name": "Nome",
-    "old_password": "Senha Antiga",
     "password": "Senha",
     "confirm_password": "Confirmação da Senha",
     "user_new_password_same_confirm_password": "A nova senha deve ser identica à confirmação de senha."
