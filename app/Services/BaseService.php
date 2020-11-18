@@ -25,7 +25,7 @@ class BaseService
      */
     public function index($perPage = 5, $pageName = "page", $page = 1)
     {
-        return $this->model::paginate($perPage, ['*'], $pageName, $page);
+        return $this->model->orderBy('id','desc')->paginate($perPage, ['*'], $pageName, $page);
     }
 
     /**

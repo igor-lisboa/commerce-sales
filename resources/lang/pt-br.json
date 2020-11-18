@@ -8,5 +8,6 @@
     "msg_logout_confirm": "Tem certeza que deseja sair?",
     "manager_msg_confirm_destroy": "Tem certeza que deseja remover :manager da gerência?",
     "manager_user_id_required": "Informe um usuário.",
-    "manager_user_id_unique": "Esse usuário já é gerente."
+    "manager_user_id_unique": "Esse usuário já é gerente.",
+    "user_msg_confirm_destroy": "Tem certeza que deseja remover o vendedor :user?"
 }

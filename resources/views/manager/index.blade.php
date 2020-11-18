@@ -13,15 +13,17 @@
     <tbody>
         @foreach($managers as $manager)
         <tr>
-            <td>{{ ($loop->index + 1) }}</td>
+            <td>{{ $manager->id }}</td>
             <td>{{$manager->user->name}}</td>
             <td>{{$manager->created_at}}</td>
             <td>
+                @if($manager->user_id != auth()->user()->id)
                 <form action="<?= route('manager.destroy', [$manager]) ?>" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" onclick="return confirm('<?= __('manager_msg_confirm_destroy', ['manager' => $manager->user->name]) ?>')">Remover da Gerência</button>
                 </form>
+                @endif
             </td>
         </tr>
         @endforeach
@@ -34,5 +36,5 @@
         </tr>
     </tfoot>
 </table>
-{{$managers->links()}}
+{{$managers->withQueryString()->links('vendor.pagination.bootstrap-4')}}
 @endsection

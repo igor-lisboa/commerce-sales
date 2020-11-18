@@ -32,16 +32,21 @@
                     <li class="nav-item <?= (request()->routeIs('manager.index') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('manager.index') ?>">Gerentes</a>
                     </li>
+                    <li class="nav-item <?= (request()->routeIs('user.index') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('user.index') ?>">Vendedores (Caixas)</a>
+                    </li>
                     @endif
                     @endif
                 </ul>
                 @auth
                 <form method="POST" class="form-inline mt-2 mt-md-0" onsubmit="return confirm('<?= __('msg_logout_confirm') ?>')" action="<?= route('logout') ?>">
                     @csrf
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">{{auth()->user()->name}} - Sair</button>
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Sair ({{auth()->user()->name}})</button>
                 </form>
                 @else
-                <a class="btn btn-outline-info my-2 my-sm-0" href="<?= route('login') ?>">Login</a>
+                <div class="form-inline mt-2 mt-md-0">
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="<?= route('login') ?>">Login</a>
+                </div>
                 @endif
             </div>
         </nav>

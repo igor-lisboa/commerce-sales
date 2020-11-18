@@ -6,6 +6,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserService extends BaseService
 {
@@ -54,28 +55,25 @@ class UserService extends BaseService
 
     /**
      * 
-     * Try make login using the credentials informed and if isn't successful, send back to previous route
+     * Register user and if isn't successful, send back to previous route
      * 
      * @param  string  $email
      * @param  string  $email
      * @param  string  $password
      * @return redirect
      */
-    public function register($name, $email, $password)
+    public function register($name, $email)
     {
         // put the variables inside one array
-        $data = compact("name", "email", "password");
+        $data = compact("name", "email");
 
         // make a hash of the password
-        $data['password'] = Hash::make($data['password']);
+        $data['password'] = Hash::make(Str::random(10));
 
         // create a new user with the data informed
-        $user = User::create($data);
-
-        // set the new user as logged user
-        Auth::login($user);
+        User::create($data);
 
         // redirect to home
-        return redirect()->route('home');
+        return redirect()->route('user.index');
     }
 }

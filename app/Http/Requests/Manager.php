@@ -2,21 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Manager as ModelsManager;
-use Illuminate\Foundation\Http\FormRequest;
-
-class Manager extends FormRequest
+class Manager extends CheckIfIsManager
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return (ModelsManager::count() == 0 || auth()->user()->manager != null);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

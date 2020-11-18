@@ -14,14 +14,4 @@
         <button type="submit">Entrar</button>
     </fieldset>
 </form>
-<form method="POST" action="<?= route('register') ?>">
-    <fieldset>
-        <h2>Registro</h2>
-        @csrf
-        <input placeholder="Nome" type="text" name="name" required value="<?= old('name') ?>" />
-        <input placeholder="E-Mail" autocomplete="username" type="email" name="email" required value="<?= old('email') ?>" />
-        <input placeholder="Senha" autocomplete="current-password" type="password" name="password" required value="<?= old('password') ?>" />
-        <button type="submit">Registrar</button>
-    </fieldset>
-</form>
 @endsection

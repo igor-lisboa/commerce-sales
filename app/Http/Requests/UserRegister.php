@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class UserRegister extends FormRequest
+class UserRegister extends CheckIfIsManager
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,7 +12,7 @@ class UserRegister extends FormRequest
      */
     public function rules()
     {
-        return ["email" => ["email", "required"], "password" => ["required"], "name" => ["required"]];
+        return ["email" => ["email", "required"], "name" => ["required"]];
     }
 
     /**
@@ -25,7 +24,6 @@ class UserRegister extends FormRequest
     {
         return [
             'email' => 'E-Mail',
-            'password' => 'Senha',
             'name' => 'Nome'
         ];
     }
@@ -40,7 +38,6 @@ class UserRegister extends FormRequest
         return [
             'email.email' => __("user_email_email"),
             'email.required' => __("user_email_required"),
-            'password.required' => __("user_password_required"),
             'name.required' => __("user_name_required")
         ];
     }

@@ -5,6 +5,10 @@
 * php artisan make:request UserAuth
 * php artisan make:model Manager -m
 * php artisan make:controller ManagerController --resource --model=Manager
+* php artisan make:request Manager
+* php artisan make:seeder UserSeeder
+* php artisan make:seeder ManagerSeeder
+* php artisan vendor:publish --tag=laravel-pagination
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)
@@ -18,7 +22,7 @@ cp .env.example .env
 ```
 * verifique as credenciais de acesso ao banco de dados usada e rode o comando abaixo
 ```sh
-php artisan migrate:fresh
+php artisan migrate:fresh --seed
 ```
 * rode o comando abaixo para poder acessar o sistema
 ```sh

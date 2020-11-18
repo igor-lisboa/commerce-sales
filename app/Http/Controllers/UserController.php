@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckIfIsManager;
 use App\Http\Requests\UserAuth;
 use App\Http\Requests\UserRegister;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -57,13 +57,26 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create()
     {
-        return $this->userService->index();
+        // if the logged user isn't one manager redirect to home
+        if (auth()->user()->manager == null) {
+            return redirect()->route('home');
+        }
+        return view('user.form');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\CheckIfIsManager
+     */
+    public function index(CheckIfIsManager $request)
+    {
+        return view('user.index', ['users' => $this->userService->index(5, 'page', $request->page ?? 1)]);
     }
 
     /**
@@ -74,40 +87,25 @@ class UserController extends Controller
      */
     public function store(UserRegister $request)
     {
-        return $this->userService->register($request->name, $request->email, $request->password);
+        return $this->userService->register($request->name, $request->email);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove the specified resource from storage and use the CheckIfIsManager to verify if the logged user can do it
      *
+     * @param  \App\Http\Requests\Manager  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function destroy(CheckIfIsManager $request, User $user)
     {
-        //
-    }
+        // set the user model as user service's model 
+        $this->userService->setModel($user);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
+        // destroy from db this user register
+        $this->userService->destroy();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
+        // redirect back to user index page
+        return redirect()->route('user.index');
     }
 }
