@@ -30,4 +30,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function manager()
+    {
+        return $this->hasOne('\App\Models\Manager');
+    }
 }

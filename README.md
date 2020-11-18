@@ -3,6 +3,8 @@
 * laravel new commerceSales
 * php artisan make:controller UserController --resource --model=User
 * php artisan make:request UserAuth
+* php artisan make:model Manager -m
+* php artisan make:controller ManagerController --resource --model=Manager
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)

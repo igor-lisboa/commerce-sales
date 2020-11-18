@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +26,9 @@ Route::post('/register', [UserController::class, "store"])->name('register');
 
 Route::middleware(['authenticator'])->group(function () {
     Route::post('/logout', [UserController::class, "logout"])->name('logout');
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/home', [HomeController::class, "home"])->name('home');
+
+    Route::post('/manager', [ManagerController::class, "store"])->name('manager_register');
 
     Route::post('keep-token-alive', function () {
         return 'Token must have been valid, and the session expiration has been extended.'; //https://stackoverflow.com/q/31449434/470749
