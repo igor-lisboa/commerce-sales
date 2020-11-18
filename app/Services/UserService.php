@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\RequestPasswordChange;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class UserService extends BaseService
      * @param  string  $email
      * @param  string  $password
      * @param  boolean  $remember
-     * @return redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function auth($email, $password, $remember = false)
     {
@@ -45,11 +46,39 @@ class UserService extends BaseService
     /**
      * 
      * Logout user
-     * @return redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {
         Auth::logout();
+        return redirect()->route('login');
+    }
+
+    /**
+     * 
+     * Send the email to update the password from one user
+     * @param string $email
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function requestChangePassword($email)
+    {
+        // find the user
+        $user = User::where('email', '=', $email)->first();
+
+        // if user exists
+        if ($user != null) {
+            // update the remember token
+            $user->remember_token = Str::random(10);
+            $user->save();
+
+            // call the event of RequestPasswordChange
+            $eventRequestPasswordChange = new RequestPasswordChange($user);
+
+            // Dispatch the event
+            event($eventRequestPasswordChange);
+        }
+
+        // redireciona p login
         return redirect()->route('login');
     }
 
@@ -60,7 +89,7 @@ class UserService extends BaseService
      * @param  string  $email
      * @param  string  $email
      * @param  string  $password
-     * @return redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function register($name, $email)
     {
@@ -75,5 +104,20 @@ class UserService extends BaseService
 
         // redirect to home
         return redirect()->route('user.index');
+    }
+
+    /**
+     * 
+     * update password of one user by remeber_token
+     * 
+     * @param  string  $remember_token
+     * @param  array  $atributtes
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updatePassword($remember_token, $atributtes)
+    {
+        $this->setModel(User::where('remember_token', '=', $remember_token)->firstOrFail());
+        $this->update(['password' => Hash::make($atributtes['password'])]);
+        return redirect()->route('home');
     }
 }

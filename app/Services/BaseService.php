@@ -57,7 +57,7 @@ class BaseService
      */
     public function update($attributes)
     {
-        return $this->model::update($attributes);
+        return $this->model->update($attributes);
     }
 
     /**

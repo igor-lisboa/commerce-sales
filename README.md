@@ -9,6 +9,11 @@
 * php artisan make:seeder UserSeeder
 * php artisan make:seeder ManagerSeeder
 * php artisan vendor:publish --tag=laravel-pagination
+* php artisan make:request UserUpdateRequest
+* php artisan make:mail ChangePassword
+* php artisan make:event RequestPasswordChange
+* php artisan make:listener SendMailRequestChangePassword -e RequestPasswordChange
+* php artisan make:request UserUpdatePassword
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)

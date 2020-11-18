@@ -2,12 +2,19 @@
     "msg_invalid_credentials": "Usuário e/ou senha incorretos",
     "user_email_email": "Informe um E-Mail válido.",
     "user_email_required": "Informe um E-Mail.",
-    "user_password_required": "Informe sua senha.",
+    "user_password_required": "Informe uma senha.",
     "user_remember_boolean": "Lembre de mim precisa ser booleano.",
     "user_name_required": "Informe um Nome.",
     "msg_logout_confirm": "Tem certeza que deseja sair?",
     "manager_msg_confirm_destroy": "Tem certeza que deseja remover :manager da gerência?",
     "manager_user_id_required": "Informe um usuário.",
     "manager_user_id_unique": "Esse usuário já é gerente.",
-    "user_msg_confirm_destroy": "Tem certeza que deseja remover o vendedor :user?"
+    "user_msg_confirm_destroy": "Tem certeza que deseja remover o vendedor :user?",
+    "change_password_email_subject": "Solicitação de mudança de senha",
+    "msg_change_password_mail_send": "Será enviado um email para seu email cadastrando contendo o link para atualização da senha.",
+    "Name": "Nome",
+    "old_password": "Senha Antiga",
+    "password": "Senha",
+    "confirm_password": "Confirmação da Senha",
+    "user_new_password_same_confirm_password": "A nova senha deve ser identica à confirmação de senha."
 }

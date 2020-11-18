@@ -14,4 +14,5 @@
         <button type="submit">Entrar</button>
     </fieldset>
 </form>
+<a href="<?= route('set_user_change_password') ?>">Esqueci minha senha</a>
 @endsection

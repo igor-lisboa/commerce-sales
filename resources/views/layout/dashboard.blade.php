@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="UFF | Trabalho de Projeto de Software">
     <meta name="author" content="Caio Wey, Igor Lisboa">
-    <title>{{env('APP_NAME')}}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,7 +18,7 @@
 <body id="app">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="{{url('/')}}">{{env('APP_NAME')}}</a>
+            <a class="navbar-brand" href="{{url('/')}}">{{ config('app.name') }}</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,9 +39,14 @@
                     @endif
                 </ul>
                 @auth
+                <ul class="navbar-nav">
+                    <li class="nav-item <?= (request()->routeIs('your_user') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('your_user') ?>">{{auth()->user()->name}}</a>
+                    </li>
+                </ul>
                 <form method="POST" class="form-inline mt-2 mt-md-0" onsubmit="return confirm('<?= __('msg_logout_confirm') ?>')" action="<?= route('logout') ?>">
                     @csrf
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Sair ({{auth()->user()->name}})</button>
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Sair</button>
                 </form>
                 @else
                 <div class="form-inline mt-2 mt-md-0">

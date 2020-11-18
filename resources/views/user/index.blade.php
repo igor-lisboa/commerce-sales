@@ -17,13 +17,17 @@
             <td>{{$user->name}}</td>
             <td>{{$user->created_at}}</td>
             <td>
-                @if($user->id != auth()->user()->id)
-                <form action="<?= route('user.destroy', [$user]) ?>" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" onclick="return confirm('<?= __('user_msg_confirm_destroy', ['user' => $user->name]) ?>')">Remover Vendedor</button>
-                </form>
-                @endif
+                <div class="d-flex">
+                    @if($user->id != auth()->user()->id)
+                    <form action="<?= route('user.destroy', [$user]) ?>" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" onclick="return confirm('<?= __('user_msg_confirm_destroy', ['user' => $user->name]) ?>')">Remover Vendedor</button>
+                    </form>
+                    @endif
+                    <button type="submit" onclick="window.location.replace('<?= route('user.edit', [$user]) ?>')">Editar</button>
+                </div>
+
             </td>
         </tr>
         @endforeach
