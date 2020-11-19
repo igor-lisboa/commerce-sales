@@ -17,8 +17,8 @@
         <tr>
             <td>{{ $product->id }}</td>
             <td>{{$product->name}}</td>
-            <td>{{ $product->getPrice() }}</td>
-            <td>{{ ($product->price_cents_promotion ? $product->getPricePromotion() : '') }}</td>
+            <td>{{ $product->price_cents }}</td>
+            <td>{{ ($product->price_cents_promotion ? $product->price_cents_promotion : '') }}</td>
             <td>{{$product->provider}}</td>
             <td>
                 <div class="d-flex">

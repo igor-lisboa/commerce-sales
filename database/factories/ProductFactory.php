@@ -21,13 +21,13 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $promotion_price = $this->faker->randomNumber();
-        $price = $this->faker->randomNumber();
+        $promotion_price = $this->faker->randomNumber() / 100;
+        $price = $this->faker->randomNumber() / 100;
         return [
             'name' => $this->faker->word,
             'bar_code' => strval($this->faker->isbn13),
             'provider' => $this->faker->company(),
-            'price_cents' => $this->faker->randomNumber(),
+            'price_cents' => $price,
             'price_cents_promotion' => ($promotion_price < $price ? $promotion_price  : null),
         ];
     }

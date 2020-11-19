@@ -19,6 +19,7 @@
 * php artisan make:factory ProductFactory --model=Product
 * php artisan make:model ProductStock -m
 * php artisan make:seeder ProductStockSeeder
+* php artisan make:request Product
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)

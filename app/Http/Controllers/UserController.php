@@ -98,7 +98,7 @@ class UserController extends Controller
         }
         $this->userService->setModel($user);
         $this->userService->update($request->validated());
-        return redirect()->route('user.edit', [$user]);
+        return redirect()->route('user.index');
     }
 
     /**
