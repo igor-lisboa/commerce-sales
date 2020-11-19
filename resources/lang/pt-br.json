@@ -10,6 +10,7 @@
     "manager_user_id_required": "Informe um usuário.",
     "manager_user_id_unique": "Esse usuário já é gerente.",
     "user_msg_confirm_destroy": "Tem certeza que deseja remover o vendedor :user?",
+    "product_msg_confirm_destroy": "Tem certeza que deseja remover o produto :product?",
     "change_password_email_subject": "Solicitação de mudança de senha",
     "msg_change_password_mail_send": "Será enviado um email para seu email cadastrando contendo o link para atualização da senha.",
     "Name": "Nome",

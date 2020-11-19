@@ -14,11 +14,16 @@
 * php artisan make:event RequestPasswordChange
 * php artisan make:listener SendMailRequestChangePassword -e RequestPasswordChange
 * php artisan make:request UserUpdatePassword
+* php artisan make:model Product -m
+* php artisan make:controller ProductController --resource --model=Product
+* php artisan make:factory ProductFactory --model=Product
+* php artisan make:model ProductStock -m
+* php artisan make:seeder ProductStockSeeder
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)
 * [php](https://www.php.net/)
-* [mysql](https://www.mysql.com/)
+* [mysql](https://www.mysql.com/) ou [postgres](https://www.postgresql.org/)
 
 # Para iniciar o projeto
 * crie .env a partir de .env.example

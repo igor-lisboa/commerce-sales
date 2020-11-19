@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,9 @@ Route::middleware(['authenticator'])->group(function () {
 
     Route::get('your-user', [UserController::class, "editUser"])->name('your_user');
 
-
     Route::resource('manager', ManagerController::class);
     Route::resource('user', UserController::class);
+    Route::resource('product', ProductController::class);
 
     Route::post('keep-token-alive', function () {
         return 'Token must have been valid, and the session expiration has been extended.'; //https://stackoverflow.com/q/31449434/470749
