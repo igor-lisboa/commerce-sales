@@ -37,7 +37,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.form');
     }
 
     /**
@@ -52,17 +52,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Product  $product
@@ -70,7 +59,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.form', ['product' => $product]);
     }
 
     /**
@@ -93,6 +82,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        // set the product model as product service's model 
+        $this->productService->setModel($product);
+
+        // destroy from db this product register
+        $this->productService->destroy();
+
+        // redirect back to product index page
+        return redirect()->route('product.index');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CheckIfIsManager;
 use App\Http\Requests\Manager as RequestsManager;
 use App\Models\Manager;
 use App\Models\User;
@@ -26,24 +25,15 @@ class ManagerController extends Controller
      */
     public function index(Request $request)
     {
-        // if the logged user isn't one manager redirect to home
-        if (auth()->user()->manager == null) {
-            return redirect()->route('home');
-        }
         return view('manager.index', ['managers' => $this->managerService->index(5, 'page', $request->page ?? 1)]);
     }
 
     /**
      *
-     * @param  \App\Http\Requests\CheckIfIsManager  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(CheckIfIsManager $request)
+    public function create()
     {
-        // if the logged user isn't one manager redirect to home
-        if (auth()->user()->manager == null) {
-            return redirect()->route('home');
-        }
         return view('manager.create', ['usersNotManagers' => User::whereDoesntHave('manager')->get()]);
     }
 
@@ -60,13 +50,12 @@ class ManagerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage and use the CheckIfIsManager to verify if the logged user can do it
+     * Remove the specified resource from storage
      *
-     * @param  \App\Http\Requests\CheckIfIsManager  $request
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CheckIfIsManager $request, Manager $manager)
+    public function destroy(Manager $manager)
     {
         // set the manager model as manager service's model 
         $this->managerService->setModel($manager);

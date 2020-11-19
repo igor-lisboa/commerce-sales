@@ -15,7 +15,7 @@ class CreateProductStocksTable extends Migration
     {
         Schema::create('product_stocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->references('id')->on('products');
+            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('input')->nullable();
             $table->integer('output')->nullable();
             $table->timestamps();

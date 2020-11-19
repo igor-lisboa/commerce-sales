@@ -30,14 +30,15 @@ Route::get('change-password/{token}', [UserController::class, "changePassword"])
 Route::post('change-password/{token}', [UserController::class, "updatePassword"])->name('update_password');
 
 Route::middleware(['authenticator'])->group(function () {
+    Route::get('your-user', [UserController::class, "editUser"])->name('your_user');
     Route::post('logout', [UserController::class, "logout"])->name('logout');
     Route::get('home', [HomeController::class, "home"])->name('home');
-
-    Route::get('your-user', [UserController::class, "editUser"])->name('your_user');
-
-    Route::resource('manager', ManagerController::class);
     Route::resource('user', UserController::class);
-    Route::resource('product', ProductController::class);
+
+    Route::middleware(['is.manager'])->group(function () {
+        Route::resource('manager', ManagerController::class);
+        Route::resource('product', ProductController::class);
+    });
 
     Route::post('keep-token-alive', function () {
         return 'Token must have been valid, and the session expiration has been extended.'; //https://stackoverflow.com/q/31449434/470749

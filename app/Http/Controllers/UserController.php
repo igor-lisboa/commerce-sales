@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CheckIfIsManager;
 use App\Http\Requests\UserAuth;
 use App\Http\Requests\UserRegister;
 use App\Http\Requests\UserUpdatePassword;
@@ -18,6 +17,7 @@ class UserController extends Controller
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+        $this->middleware('is.manager', ['only' => ['destroy', 'store', 'index', 'create']]);
     }
 
     /**
@@ -86,36 +86,34 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\CheckIfIsManager  $request
+     * @param  \App\Http\Requests\UserRegister  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(UserRegister $request, User $user)
     {
+        // if the logged user isn't one manager redirect to your-user page
+        if (auth()->user()->manager == null && $user->id != auth()->user()->id) {
+            return redirect()->route('your_user');
+        }
         $this->userService->setModel($user);
         $this->userService->update($request->validated());
         return redirect()->route('user.edit', [$user]);
     }
 
     /**
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        // if the logged user isn't one manager redirect to home
-        if (auth()->user()->manager == null) {
-            return redirect()->route('home');
-        }
         return view('user.form');
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\CheckIfIsManager
      */
-    public function index(CheckIfIsManager $request)
+    public function index(Request $request)
     {
         return view('user.index', ['users' => $this->userService->index(5, 'page', $request->page ?? 1)]);
     }
@@ -123,7 +121,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CheckIfIsManager  $request
+     * @param  \App\Http\Requests\UserRegister  $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRegister $request)
@@ -134,7 +132,7 @@ class UserController extends Controller
     /**
      * if the email is valid user will receive one email to update the password
      *
-     * @param  \App\Http\Requests\CheckIfIsManager  $request
+     * @param  Request  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
@@ -176,13 +174,12 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage and use the CheckIfIsManager to verify if the logged user can do it
+     * Remove the specified resource from storage
      *
-     * @param  \App\Http\Requests\CheckIfIsManager  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CheckIfIsManager $request, User $user)
+    public function destroy(User $user)
     {
         // set the user model as user service's model 
         $this->userService->setModel($user);

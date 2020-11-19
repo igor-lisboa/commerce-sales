@@ -21,11 +21,14 @@
             <td>{{ ($product->price_cents_promotion ? $product->getPricePromotion() : '') }}</td>
             <td>{{$product->provider}}</td>
             <td>
-                <form action="<?= route('product.destroy', [$product]) ?>" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" onclick="return confirm('<?= __('product_msg_confirm_destroy', ['product' => $product->name]) ?>')">Remover Produto</button>
-                </form>
+                <div class="d-flex">
+                    <form action="<?= route('product.destroy', [$product]) ?>" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" onclick="return confirm('<?= __('product_msg_confirm_destroy', ['product' => $product->name]) ?>')">Remover Produto</button>
+                    </form>
+                    <button type="submit" onclick="window.location.replace('<?= route('product.edit', [$product]) ?>')">Editar</button>
+                </div>
             </td>
         </tr>
         @endforeach
