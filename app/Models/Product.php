@@ -29,7 +29,11 @@ class Product extends Model
 
     public function getPriceCentsPromotionAttribute($value)
     {
-        return number_format($value / 100, 2, '.', '');
+        if ($value != null) {
+            return number_format($value / 100, 2, '.', '');
+        } else {
+            return null;
+        }
     }
 
     public function setPriceCentsAttribute($value)
@@ -39,6 +43,8 @@ class Product extends Model
 
     public function setPriceCentsPromotionAttribute($value)
     {
-        $this->attributes['price_cents_promotion'] = $value * 100;
+        if ($value != null) {
+            $this->attributes['price_cents_promotion'] = $value * 100;
+        }
     }
 }
