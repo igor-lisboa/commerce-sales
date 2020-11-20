@@ -15,4 +15,29 @@
         <button type="submit">Gravar</button>
     </fieldset>
 </form>
+<hr>
+<form method="POST" action="<?= route('product_stock_add', [$product]) ?>">
+    <fieldset>
+        @csrf
+        <h2>ADIÇÃO DE {{$product->name}}</h2>
+        <input type="hidden" name="product_id" value="<?= $product->id ?>" />
+        <input placeholder="Quantidade adicionada" min="0" type="number" name="input" required value="<?= old('input') ?>" />
+        <button type="submit">Registrar adição de itens</button>
+    </fieldset>
+</form>
+<hr>
+<h1>{{ $product->stock()->select(DB::raw('sum(input) - sum(output)'))->get() }}</h1>
+<h2>Histórico de Adições no Estoque</h2>
+<table>
+    <tr>
+        <th>Data de Adição</th>
+        <th>Quantidade</th>
+    </tr>
+    @foreach($product->stock as $stock)
+    <tr>
+        <td>{{$stock->created_at}}</td>
+        <td>{{$stock->input}}</td>
+    </tr>
+    @endforeach
+</table>
 @endsection

@@ -38,6 +38,7 @@ Route::middleware(['authenticator'])->group(function () {
     Route::middleware(['is.manager'])->group(function () {
         Route::resource('manager', ManagerController::class);
         Route::resource('product', ProductController::class);
+        Route::post('product-stock-add', [ProductController::class, "stockAdd"])->name('product_stock_add');
     });
 
     Route::post('keep-token-alive', function () {

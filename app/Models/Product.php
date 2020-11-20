@@ -22,6 +22,11 @@ class Product extends Model
         'provider',
     ];
 
+    public function stock()
+    {
+        return $this->hasMany('\App\Models\ProductStock');
+    }
+
     public function getPriceCentsAttribute($value)
     {
         return number_format($value / 100, 2, '.', '');

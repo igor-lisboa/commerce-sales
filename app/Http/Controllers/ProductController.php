@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Product as RequestsProduct;
+use App\Http\Requests\ProductStock;
 use App\Models\Product;
 use App\Services\ProductService;
+use App\Services\ProductStockService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     private $productService;
+    private $productStockService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, ProductStockService $producStockService)
     {
         $this->productService = $productService;
+        $this->productStockService = $producStockService;
     }
 
     /**
@@ -62,6 +66,12 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('product.form', ['product' => $product]);
+    }
+
+    public function stockAdd(ProductStock $request)
+    {
+        $this->productStockService->store($request->validated());
+        return redirect()->route('product.edit', [$request->product_id]);
     }
 
     /**
