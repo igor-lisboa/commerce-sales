@@ -21,22 +21,24 @@
         @csrf
         <h2>ADIÇÃO DE {{$product->name}}</h2>
         <input type="hidden" name="product_id" value="<?= $product->id ?>" />
-        <input placeholder="Quantidade adicionada" min="0" type="number" name="input" required value="<?= old('input') ?>" />
+        <input placeholder="Quantidade adicionada" min="1" type="number" name="input" required value="<?= old('input') ?>" />
         <button type="submit">Registrar adição de itens</button>
     </fieldset>
 </form>
 <hr>
-<h1>{{ $product->stock()->select(DB::raw('sum(input) - sum(output)'))->get() }}</h1>
-<h2>Histórico de Adições no Estoque</h2>
+<h1>Quantidade de Itens no Estoque: {{ $product->balance }}</h1>
+<h2>Histórico de Operações no Estoque</h2>
 <table>
     <tr>
-        <th>Data de Adição</th>
-        <th>Quantidade</th>
+        <th>Data de Operação</th>
+        <th>Quantidade Adicionada</th>
+        <th>Quantidade Retirada</th>
     </tr>
     @foreach($product->stock as $stock)
     <tr>
         <td>{{$stock->created_at}}</td>
         <td>{{$stock->input}}</td>
+        <td>{{$stock->output}}</td>
     </tr>
     @endforeach
 </table>

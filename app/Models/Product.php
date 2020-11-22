@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -25,6 +26,11 @@ class Product extends Model
     public function stock()
     {
         return $this->hasMany('\App\Models\ProductStock');
+    }
+
+    public function getBalanceAttribute()
+    {
+        return $this->stock()->select(DB::raw('sum(input) - sum(output) as stock'))->pluck('stock')[0] ?? 0;
     }
 
     public function getPriceCentsAttribute($value)

@@ -21,5 +21,6 @@
     "product_price_cents_numeric": "Infome um preço numérico maior que 0 para o produto.",
     "product_price_cents_promotion_numeric": "Infome um preço promocional numérico maior que 0 e menor que o preço do produto.",
     "provider_required": "Informe um fornecedor para o produto.",
-    "product_bar_code_unique": "Informe o código de barras único para o produto."
+    "product_bar_code_unique": "Informe o código de barras único para o produto.",
+    "product_stock_input": "Informe uma entrada de itens em estoque maior que 1."
 }

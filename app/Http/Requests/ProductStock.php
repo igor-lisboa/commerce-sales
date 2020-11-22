@@ -20,12 +20,12 @@ class ProductStock extends FormRequest
             'input' => [
                 'numeric',
                 'nullable',
-                'min:0'
+                'min:1'
             ],
             'output' => [
                 'numeric',
                 'nullable',
-                'min:0'
+                'min:1'
             ]
         ];
     }
@@ -39,7 +39,7 @@ class ProductStock extends FormRequest
     {
         return [
             'product_id' => __("product_stock_product_id"),
-            'input' => __("product_stock_input"),
+            'input.min' => __("product_stock_input"),
             'output' => __("product_stock_output"),
         ];
     }

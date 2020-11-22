@@ -8,6 +8,7 @@
             <th>Nome</th>
             <th>Preço(R$)</th>
             <th>Preço Promocional(R$)</th>
+            <th>Quantidade em Estoque</th>
             <th>Fornecedor</th>
             <th>Opções</th>
         </tr>
@@ -19,6 +20,7 @@
             <td>{{$product->name}}</td>
             <td>{{ $product->price_cents }}</td>
             <td>{{ ($product->price_cents_promotion ? $product->price_cents_promotion : '') }}</td>
+            <td>{{$product->balance}}</td>
             <td>{{$product->provider}}</td>
             <td>
                 <div class="d-flex">
