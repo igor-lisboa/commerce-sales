@@ -10,6 +10,7 @@
             <th>Identidade</th>
             <th>Endereço</th>
             <th>E-Mail</th>
+            <th>Preferêncial</th>
             <th>Opções</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
             <td>{{$client->identity}}</td>
             <td>{{$client->address}}</td>
             <td>{{$client->email}}</td>
+            <td>{{ ($client->preferential ? 'Sim' : 'Não') }}</td>
             <td>
                 <div class="d-flex">
                     <form action="<?= route('client.destroy', [$client]) ?>" method="POST">

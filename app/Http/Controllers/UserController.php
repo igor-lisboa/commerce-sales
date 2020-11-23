@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserAuth;
 use App\Http\Requests\UserRegister;
 use App\Http\Requests\UserUpdatePassword;
+use App\Models\Session;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -139,6 +140,16 @@ class UserController extends Controller
     public function userRequestChangePassword(Request $request)
     {
         return $this->userService->requestChangePassword($request->email);
+    }
+
+    /**
+     * get active user sessions on the system
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activeUsers()
+    {
+        return view('user.active-users', ['activeUserSessions' => Session::whereNotNull('user_id')->get()]);
     }
 
     /**

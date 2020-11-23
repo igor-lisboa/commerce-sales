@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Client as RequestsClient;
 use App\Models\Client;
 use App\Services\ClientService;
 use Illuminate\Http\Request;
@@ -39,10 +40,10 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Client $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestsClient $request)
     {
         $this->clientService->store($request->all());
         return redirect()->route('client.index');
@@ -62,11 +63,11 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Client  $request
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(RequestsClient $request, Client $client)
     {
         $this->clientService->setModel($client);
         $this->clientService->update($request->all());

@@ -41,6 +41,9 @@
                     <li class="nav-item <?= (request()->routeIs('product.index') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('product.index') ?>">Produtos</a>
                     </li>
+                    <li class="nav-item <?= (request()->routeIs('active_users') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('active_users') ?>">Usuários Ativos</a>
+                    </li>
                     @endif
                     @endif
                 </ul>
