@@ -42,6 +42,11 @@ class Sale extends Model
         return $this->products()->select(DB::raw('sum(price_cents * quantity) as total'))->pluck('total')[0] ?? 0;
     }
 
+    public function getChangeCentsAttribute()
+    {
+        return $this->amount_paid_cents - $this->getTotalDueCentsAttribute();
+    }
+
     public function getTotalDueCentsAttribute()
     {
         return $this->getTotalAmountCentsAttribute() - $this->used_points;

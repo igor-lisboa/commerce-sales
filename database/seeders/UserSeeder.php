@@ -20,13 +20,13 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'name' => 'ADM2',
-                'email' => 'igor@uff.com',
+                'email' => 'igor_lisboa@id.uff.br',
                 'password' => Hash::make('123'),
                 'remember_token' => Str::random(10),
             ],
             [
                 'name' => 'ADM',
-                'email' => 'caio@uff.com',
+                'email' => 'caiowey@id.uff.br',
                 'password' => Hash::make('123'),
                 'remember_token' => Str::random(10),
             ]

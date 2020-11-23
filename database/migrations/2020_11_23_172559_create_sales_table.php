@@ -20,8 +20,7 @@ class CreateSalesTable extends Migration
             $table->foreignId('payment_method_id')->references('id')->on('payment_methods')->nullable();
             $table->boolean('canceled')->default(false);
             $table->integer('amount_paid_cents')->nullable();
-            $table->integer('change_paid_cents')->nullable();
-            $table->integer('used_points')->nullable();
+            $table->integer('used_points')->default(0);
             $table->timestamps();
         });
     }
