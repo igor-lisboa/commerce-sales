@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -149,7 +150,7 @@ class UserController extends Controller
      */
     public function activeUsers()
     {
-        return view('user.active-users', ['activeUserSessions' => Session::whereNotNull('user_id')->get()]);
+        return view('user.active-users', ['activeUserSessions' => Session::whereNotNull('user_id')->orderBy('last_activity', 'desc')->get()]);
     }
 
     /**
