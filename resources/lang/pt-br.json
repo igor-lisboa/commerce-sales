@@ -29,5 +29,8 @@
     "client_email_required": "O atributo email é obrigatório.",
     "client_cpf_required": "O atributo CPF é obrigatório.",
     "client_identity_required": "O atributo identidade é obrigatório.",
-    "client_address_required": "O atributo endereço é obrigatório."
+    "client_address_required": "O atributo endereço é obrigatório.",
+    "complaint_complaint_required": "Informe a reclamação do cliente.",
+    "complaint_msg_confirm_destroy": "Tem certeza que deseja remover a reclamação :complaint?",
+    "complaint_client_id_required": "Informe o cliente que está realizando a reclamação."
 }

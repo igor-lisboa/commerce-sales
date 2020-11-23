@@ -5,6 +5,7 @@
     <fieldset>
         <h2>Login</h2>
         @csrf
+        <input type="hidden" name="redirect" value="<?= old('redirect') ?? $redirect ?>">
         <input placeholder="E-Mail" autocomplete="username" type="email" name="email" required value="<?= old('email') ?>" />
         <input placeholder="Senha" autocomplete="current-password" type="password" name="password" required value="<?= old('password') ?>" />
         <label for="remember">

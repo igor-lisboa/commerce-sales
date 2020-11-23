@@ -45,7 +45,7 @@ class ClientController extends Controller
      */
     public function store(RequestsClient $request)
     {
-        $this->clientService->store($request->all());
+        $this->clientService->store($request->validated());
         return redirect()->route('client.index');
     }
 
@@ -70,7 +70,7 @@ class ClientController extends Controller
     public function update(RequestsClient $request, Client $client)
     {
         $this->clientService->setModel($client);
-        $this->clientService->update($request->all());
+        $this->clientService->update($request->validated());
         return redirect()->route('client.index');
     }
 

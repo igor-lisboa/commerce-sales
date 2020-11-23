@@ -11,6 +11,7 @@
             <th>Endereço</th>
             <th>E-Mail</th>
             <th>Preferêncial</th>
+            <th>Reclamações</th>
             <th>Opções</th>
         </tr>
     </thead>
@@ -24,6 +25,7 @@
             <td>{{$client->address}}</td>
             <td>{{$client->email}}</td>
             <td>{{ ($client->preferential ? 'Sim' : 'Não') }}</td>
+            <td>{{$client->complaints()->count()}}</td>
             <td>
                 <div class="d-flex">
                     <form action="<?= route('client.destroy', [$client]) ?>" method="POST">
@@ -31,7 +33,7 @@
                         @csrf
                         <button type="submit" onclick="return confirm('<?= __('client_msg_confirm_destroy', ['client' => $client->name]) ?>')">Remover Cliente</button>
                     </form>
-                    <button type="submit" onclick="window.location.replace('<?= route('client.edit', [$client]) ?>')">Editar</button>
+                    <button type="button" onclick="window.location.replace('<?= route('client.edit', [$client]) ?>')">Editar</button>
                 </div>
             </td>
         </tr>
@@ -40,7 +42,7 @@
     <tfoot>
         <tr>
             <td colspan="4">
-                <button type="submit" onclick="window.location.replace('<?= route('client.create') ?>')">Inserir novo Cliente</button>
+                <button type="button" onclick="window.location.replace('<?= route('client.create') ?>')">Inserir novo Cliente</button>
             </td>
         </tr>
     </tfoot>

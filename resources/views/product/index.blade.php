@@ -29,7 +29,7 @@
                         @csrf
                         <button type="submit" onclick="return confirm('<?= __('product_msg_confirm_destroy', ['product' => $product->name]) ?>')">Remover Produto</button>
                     </form>
-                    <button type="submit" onclick="window.location.replace('<?= route('product.edit', [$product]) ?>')">Editar</button>
+                    <button type="button" onclick="window.location.replace('<?= route('product.edit', [$product]) ?>')">Editar</button>
                 </div>
             </td>
         </tr>
@@ -38,7 +38,7 @@
     <tfoot>
         <tr>
             <td colspan="4">
-                <button type="submit" onclick="window.location.replace('<?= route('product.create') ?>')">Inserir novo Produto</button>
+                <button type="button" onclick="window.location.replace('<?= route('product.create') ?>')">Inserir novo Produto</button>
             </td>
         </tr>
     </tfoot>

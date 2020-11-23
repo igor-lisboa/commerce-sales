@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Events\RequestPasswordChange;
 use App\Models\User;
-
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -36,11 +36,8 @@ class UserService extends BaseService
         // try make the login
         if (!Auth::attempt(["email" => $email, "password" => $password], $remember)) {
             // if the auth fail send to last route and pass msg_invalid_credentials as error
-            return redirect()->back()->withErrors(__("msg_invalid_credentials"))->withInput();
+            throw new Exception(__("msg_invalid_credentials"));
         }
-
-        // if the auth is ok send to home
-        return redirect()->route('home');
     }
 
     /**
@@ -51,7 +48,6 @@ class UserService extends BaseService
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
     }
 
     /**
@@ -77,9 +73,6 @@ class UserService extends BaseService
             // Dispatch the event
             event($eventRequestPasswordChange);
         }
-
-        // redireciona p login
-        return redirect()->route('login');
     }
 
     /**
@@ -101,9 +94,6 @@ class UserService extends BaseService
 
         // create a new user with the data informed
         User::create($data);
-
-        // redirect to home
-        return redirect()->route('user.index');
     }
 
     /**
@@ -118,6 +108,5 @@ class UserService extends BaseService
     {
         $this->setModel(User::where('remember_token', '=', $remember_token)->firstOrFail());
         $this->update(['password' => Hash::make($atributtes['password'])]);
-        return redirect()->route('home');
     }
 }

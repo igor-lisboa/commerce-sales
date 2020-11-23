@@ -31,7 +31,7 @@
     <tfoot>
         <tr>
             <td colspan="4">
-                <button type="submit" onclick="window.location.replace('<?= route('manager.create') ?>')">Inserir novo Gerente</button>
+                <button type="button" onclick="window.location.replace('<?= route('manager.create') ?>')">Inserir novo Gerente</button>
             </td>
         </tr>
     </tfoot>

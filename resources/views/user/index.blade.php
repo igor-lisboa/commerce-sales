@@ -25,9 +25,8 @@
                         <button type="submit" onclick="return confirm('<?= __('user_msg_confirm_destroy', ['user' => $user->name]) ?>')">Remover Vendedor</button>
                     </form>
                     @endif
-                    <button type="submit" onclick="window.location.replace('<?= route('user.edit', [$user]) ?>')">Editar</button>
+                    <button type="button" onclick="window.location.replace('<?= route('user.edit', [$user]) ?>')">Editar</button>
                 </div>
-
             </td>
         </tr>
         @endforeach
@@ -35,7 +34,7 @@
     <tfoot>
         <tr>
             <td colspan="4">
-                <button type="submit" onclick="window.location.replace('<?= route('user.create') ?>')">Inserir novo Vendedor</button>
+                <button type="button" onclick="window.location.replace('<?= route('user.create') ?>')">Inserir novo Vendedor</button>
             </td>
         </tr>
     </tfoot>

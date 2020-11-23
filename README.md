@@ -26,6 +26,10 @@
 * php artisan make:request Client
 * php artisan session:table
 * php artisan make:model Session
+* php artisan make:model Complaint -m
+* php artisan make:controller ComplaintController --resource --model=Complaint
+* php artisan make:request Complaint
+* php artisan make:factory ClientFactory --model=Client
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)

@@ -1,6 +1,7 @@
 @extends('layout.dashboard')
 
 @section('content')
-{{auth()->user()}}
-<a href="#">Cria Venda</a>
+<button type="button" onclick="window.location.replace('#')">Cria Venda</button>
+<button type="button" onclick="window.location.replace('<?= route('complaint.create') ?>')">Registra Reclamação</button>
+<hr>
 @endsection

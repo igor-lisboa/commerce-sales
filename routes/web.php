@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProductController;
@@ -31,6 +32,7 @@ Route::get('change-password/{token}', [UserController::class, "changePassword"])
 Route::post('change-password/{token}', [UserController::class, "updatePassword"])->name('update_password');
 
 Route::middleware(['authenticator'])->group(function () {
+    Route::resource('complaint', ComplaintController::class);
     Route::get('your-user', [UserController::class, "editUser"])->name('your_user');
     Route::post('logout', [UserController::class, "logout"])->name('logout');
     Route::get('home', [HomeController::class, "home"])->name('home');

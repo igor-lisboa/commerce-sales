@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Complaint extends Model
 {
     use HasFactory;
 
@@ -15,16 +15,12 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'preferential',
-        'name',
-        'email',
-        'cpf',
-        'identity',
-        'address',
+        'complaint',
+        'client_id'
     ];
 
-    public function complaints()
+    public function client()
     {
-        return $this->hasMany('App\Models\Complaint');
+        return $this->belongsTo('App\Models\Client');
     }
 }

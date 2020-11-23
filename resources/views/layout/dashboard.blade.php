@@ -30,6 +30,9 @@
                     <li class="nav-item <?= (request()->routeIs('client.index') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('client.index') ?>">Clientes</a>
                     </li>
+                    <li class="nav-item <?= (request()->routeIs('complaint.index') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('complaint.index') ?>">Reclamações</a>
+                    </li>
                     @auth
                     @if(auth()->user()->manager)
                     <li class="nav-item <?= (request()->routeIs('manager.index') ? 'active' : '')  ?>">

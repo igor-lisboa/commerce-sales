@@ -8,9 +8,9 @@ use App\Http\Requests\UserUpdatePassword;
 use App\Models\Session;
 use App\Models\User;
 use App\Services\UserService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -25,16 +25,17 @@ class UserController extends Controller
     /**
      * show login page
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function login()
+    public function login(Request $request)
     {
         // if user is already logged in redirect to home
         if (Auth::check()) {
             return redirect()->route('home');
         }
 
-        return view('user.login');
+        return view('user.login', ['redirect' => $request->redirect ?? '']);
     }
 
     /**
@@ -44,7 +45,8 @@ class UserController extends Controller
      */
     public function logout()
     {
-        return $this->userService->logout();
+        $this->userService->logout();
+        return redirect()->route('login');
     }
 
     /**
@@ -55,9 +57,19 @@ class UserController extends Controller
      */
     public function auth(UserAuth $request)
     {
-        // Retrieve the validated input data
-        $validated = $request->validated();
-        return $this->userService->auth($validated['email'], $validated['password'], $validated['remember'] ?? false);
+        try {
+            // Retrieve the validated input data
+            $validated = $request->validated();
+            $this->userService->auth($validated['email'], $validated['password'], $validated['remember'] ?? false);
+            // if the auth is ok send to home or redirect value if is defined
+            if ($request->redirect) {
+                return redirect($request->redirect);
+            } else {
+                return redirect()->route('home');
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -128,7 +140,10 @@ class UserController extends Controller
      */
     public function store(UserRegister $request)
     {
-        return $this->userService->register($request->name, $request->email);
+        $this->userService->register($request->name, $request->email);
+
+        // redirect to home
+        return redirect()->route('user.index');
     }
 
     /**
@@ -140,7 +155,9 @@ class UserController extends Controller
      */
     public function userRequestChangePassword(Request $request)
     {
-        return $this->userService->requestChangePassword($request->email);
+        $this->userService->requestChangePassword($request->email);
+        // redireciona p login
+        return redirect()->route('login');
     }
 
     /**
@@ -161,7 +178,8 @@ class UserController extends Controller
      */
     public function updatePassword(UserUpdatePassword $request, $remember_token)
     {
-        return $this->userService->updatePassword($remember_token, $request->validated());
+        $this->userService->updatePassword($remember_token, $request->validated());
+        return redirect()->route('home');
     }
 
     /**

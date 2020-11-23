@@ -15,6 +15,7 @@
         <button type="submit">Gravar</button>
     </fieldset>
 </form>
+@if($product??null)
 <hr>
 <form method="POST" action="<?= route('product_stock_add', [$product]) ?>">
     <fieldset>
@@ -42,4 +43,5 @@
     </tr>
     @endforeach
 </table>
+@endif
 @endsection

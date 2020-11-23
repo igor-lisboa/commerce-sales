@@ -19,4 +19,8 @@
         <button type="submit">Gravar</button>
     </fieldset>
 </form>
+@if($client??null)        
+<hr>
+@include('partials.complaint.index',['complaints'=>$client->complaints()->paginate(2),'client_id'=>$client->id])
+@endif
 @endsection

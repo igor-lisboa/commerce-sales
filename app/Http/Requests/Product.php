@@ -36,9 +36,11 @@ class Product extends FormRequest
                 'required'
             ]
         ];
-        // if method is not post set bar_code as unique
+        // if method is not post set bar_code as unique ignoring current product
         if (strtoupper(request()->method()) != 'POST') {
             $rules['bar_code'][] = Rule::unique('products')->ignore($this->product->id, 'id');
+        } else {
+            $rules['bar_code'][] = Rule::unique('products');
         }
         return $rules;
     }
