@@ -21,6 +21,9 @@
 * php artisan make:seeder ProductStockSeeder
 * php artisan make:request Product
 * php artisan make:request ProductStock
+* php artisan make:model Client -m
+* php artisan make:controller ClientController --resource --model=Client
+* php artisan make:request Client
 
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)

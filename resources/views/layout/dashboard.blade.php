@@ -27,6 +27,9 @@
                     <li class="nav-item <?= (request()->routeIs('home') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('home') ?>">Home</a>
                     </li>
+                    <li class="nav-item <?= (request()->routeIs('client.index') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('client.index') ?>">Clientes</a>
+                    </li>
                     @auth
                     @if(auth()->user()->manager)
                     <li class="nav-item <?= (request()->routeIs('manager.index') ? 'active' : '')  ?>">

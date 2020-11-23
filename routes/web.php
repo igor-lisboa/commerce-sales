@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProductController;
@@ -34,6 +35,8 @@ Route::middleware(['authenticator'])->group(function () {
     Route::post('logout', [UserController::class, "logout"])->name('logout');
     Route::get('home', [HomeController::class, "home"])->name('home');
     Route::resource('user', UserController::class);
+
+    Route::resource('client', ClientController::class);
 
     Route::middleware(['is.manager'])->group(function () {
         Route::resource('manager', ManagerController::class);
