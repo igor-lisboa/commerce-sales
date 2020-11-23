@@ -1,4 +1,23 @@
-# Comandos executados
+# Para rodar o projeto voce precisa ter:
+* [composer](https://getcomposer.org/)
+* [php](https://www.php.net/)
+* [mysql](https://www.mysql.com/) OU [postgres](https://www.postgresql.org/)
+
+# Para iniciar o projeto
+* crie .env a partir de .env.example
+```sh
+cp .env.example .env
+```
+* verifique as credenciais de acesso ao banco de dados usada e rode o comando abaixo
+```sh
+php artisan migrate:fresh --seed
+```
+* rode o comando abaixo para poder acessar o sistema
+```sh
+php artisan serve
+```
+
+# Comandos executados para desenvolver o projeto
 * composer global require laravel/installer
 * laravel new commerceSales
 * php artisan make:controller UserController --resource --model=User
@@ -30,22 +49,8 @@
 * php artisan make:controller ComplaintController --resource --model=Complaint
 * php artisan make:request Complaint
 * php artisan make:factory ClientFactory --model=Client
-
-# Para rodar o projeto voce precisa ter:
-* [composer](https://getcomposer.org/)
-* [php](https://www.php.net/)
-* [mysql](https://www.mysql.com/) ou [postgres](https://www.postgresql.org/)
-
-# Para iniciar o projeto
-* crie .env a partir de .env.example
-```sh
-cp .env.example .env
-```
-* verifique as credenciais de acesso ao banco de dados usada e rode o comando abaixo
-```sh
-php artisan migrate:fresh --seed
-```
-* rode o comando abaixo para poder acessar o sistema
-```sh
-php artisan serve
-```
+* php artisan make:model Sale -m
+* php artisan make:controller SaleController --resource --model=Sale
+* php artisan make:model PaymentMethod -m
+* php artisan make:seeder PaymentMethodSeeder
+* php artisan make:model SaleProducts -m
