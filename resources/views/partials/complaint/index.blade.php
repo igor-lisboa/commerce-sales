@@ -4,6 +4,7 @@
             <th></th>
             <th>Cliente</th>
             <th>Reclamação</th>
+            <th>Realizada em</th>
             <th>Opções</th>
         </tr>
     </thead>
@@ -13,6 +14,7 @@
             <td>{{ $complaint->id }}</td>
             <td>{{$complaint->client->name}}</td>
             <td>{!! nl2br($complaint->complaint) !!}</td>
+            <td>{{$complaint->created_at}}</td>
             <td>
                 <div class="d-flex">
                     <form action="<?= route('complaint.destroy', [$complaint]) ?>" method="POST">
@@ -28,7 +30,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="4">
+            <td colspan="5">
                 <button type="button" onclick="window.location.replace('<?= route('complaint.create', ($client_id ?? null ? ['client_id' => $client_id] : [])) ?>')">Inserir nova Reclamação</button>
             </td>
         </tr>
