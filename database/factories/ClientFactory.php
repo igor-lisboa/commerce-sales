@@ -25,8 +25,8 @@ class ClientFactory extends Factory
             'preferential' => $this->faker->boolean(),
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'cpf' => $this->faker->unique()->randomNumber(),
-            'identity' => $this->faker->unique()->randomNumber(),
+            'cpf' => $this->faker->randomNumber(3) . '.' . $this->faker->randomNumber(3) . '.' . $this->faker->randomNumber(3) . '-' . $this->faker->randomNumber(2),
+            'identity' => $this->faker->unique()->randomNumber(2) . '.' . $this->faker->randomNumber(3) . '.' . $this->faker->randomNumber(3) . '-' . $this->faker->randomNumber(2),
             'address' => $this->faker->streetAddress  . ', ' . $this->faker->city . '-' . $this->faker->state . ' | ' . $this->faker->postcode,
         ];
     }
