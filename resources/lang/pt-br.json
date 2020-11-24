@@ -44,5 +44,8 @@
     "sale_product_msg_product_id_required": "Informar o ID do Produto é obrigatório.",
     "sale_product_msg_quantity_required": "Informar a Quantidade na lista de Produtos da Venda é obrigatório",
     "sale_product_msg_confirm_destroy": "Tem certeza que deseja remover o produto :product da lista?",
-    "Payment method chosen": "Método de Pagamento escolhido"
+    "Payment method chosen": "Método de Pagamento escolhido",
+    "msg_confirm_finish_sale": "Tem certeza que deseja finalizar essa Venda, com um subtotal de R$:total?",
+    "sale_msg_payment_method_id": "Informar o método de pagamento é obrigatório.",
+    "sale_msg_used_points": "Informe a pontuação a ser usada na compra com um número superior a 0."
 }

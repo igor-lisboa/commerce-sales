@@ -38,7 +38,7 @@
                     <button type="button" onclick="window.location.replace('<?= route('sale.edit', [$sale]) ?>')">Continuar com a Venda</button>
                     @endif
                     @endif
-                    <button type="button" onclick="window.location.replace('<?= route('sale.show', [$sale]) ?>')">Visualizar Venda</button>
+                    <a target="_blank" href="<?= route('sale.show', [$sale]) ?>">Visualizar Venda</button>
                 </div>
             </td>
         </tr>

@@ -69,11 +69,56 @@
     <fieldset>
         @if($sale??null)
         @method('PUT')
+        <select name="payment_method_id" required>
+            @foreach($paymentMethods as $paymentMethod)
+            <option value="{{$paymentMethod->id}}" <?= ((old('payment_method_id') ?? ($sale->payment_method_id ?? '')) == $paymentMethod->id ? 'selected' : '') ?>>{{$paymentMethod->method}}</option>
+            @endforeach
+        </select>
+        @if($sale->client->preferential)
+        <input type="number" name="used_points" placeholder="Pontos que serão usados" min="1" />
+        <small>Cada ponto equivale a 1 centavo (R$0.01)</small>
+        @endif
+        <button type="submit" onclick="return confirm('<?= __('msg_confirm_finish_sale', ['total' => $sale->total_amount]) ?>')">Finalizar</button>
+        <hr>
+        <h4>Por favor confirme os dados do CLIENTE:</h4>
+        <table>
+            <tr>
+                <td>Preferencial:</td>
+                <td>{{$sale->client->preferential ? 'Sim' : 'Não'}}</td>
+            </tr>
+            <tr>
+                <td>Nome:</td>
+                <td>{{$sale->client->name}}</td>
+            </tr>
+            <tr>
+                <td>E-Mail:</td>
+                <td>{{$sale->client->email}}</td>
+            </tr>
+            <tr>
+                <td>CPF:</td>
+                <td>{{$sale->client->cpf}}</td>
+            </tr>
+            <tr>
+                <td>Identidade:</td>
+                <td>{{$sale->client->identity}}</td>
+            </tr>
+            <tr>
+                <td>Endereço:</td>
+                <td>{{$sale->client->address}}</td>
+            </tr>
+            <tr>
+                <td>Algum dado inválido ou desatualizado?</td>
+                <td>
+                    <button type="button" onclick="window.location.replace('<?= route('client.edit', [$sale->client]) ?>')">Edite o Cliente</button>
+                </td>
+            </tr>
+        </table>
+        <hr>
         @else
         <h2>Por favor, informe o Cliente</h2>
         <select name="client_id" required>
             @foreach($clients as $client)
-            <option value="{{$client->id}}" <?= ((old('client_id') ?? ($complaint->client_id ?? '')) == $client->id ? 'selected' : '') ?>>{{$client->cpf}} | {{$client->name}} {{ ($client->preferential ? '(Preferencial)':'') }}</option>
+            <option value="{{$client->id}}" <?= (old('client_id') == $client->id ? 'selected' : '') ?>>{{$client->cpf}} | {{$client->name}} {{ ($client->preferential ? '(Preferencial)':'') }}</option>
             @endforeach
         </select>
         <button type="submit">Informar Cliente</button>

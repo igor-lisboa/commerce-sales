@@ -38,9 +38,13 @@ class ProductStock extends FormRequest
     public function messages()
     {
         return [
-            'product_id' => __("product_stock_product_id"),
+            'product_id.required' => __("product_stock_product_id"),
             'input.min' => __("product_stock_input"),
-            'output' => __("product_stock_output"),
+            'input.numeric' => __("product_stock_input"),
+            'input.nullable' => __("product_stock_input"),
+            'output.numeric' => __("product_stock_output"),
+            'output.nullable' => __("product_stock_output"),
+            'output.min' => __("product_stock_output"),
         ];
     }
 }

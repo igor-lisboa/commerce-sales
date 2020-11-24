@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaleCreate;
+use App\Http\Requests\SaleSetPaymentMethod;
 use App\Models\Client;
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Sale;
-use App\Models\SaleProduct;
 use App\Services\SaleService;
 use Illuminate\Http\Request;
 
@@ -62,21 +63,33 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        return view('sale.form', ['sale' => $sale, 'products' => Product::whereNotIn('id', $sale->products()->pluck('product_id'))->get()]);
+        if ($sale->status == __("Opened")) {
+            return view('sale.form', ['sale' => $sale, 'products' => Product::whereNotIn('id', $sale->products()->pluck('product_id'))->get(), 'paymentMethods' => PaymentMethod::get()]);
+        } else {
+            if ($sale->status == __("Payment method chosen")) {
+                return "x";
+            } else {
+                return redirect()->route('sale.index');
+            }
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SaleSetPaymentMethod  $request
      * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sale $sale)
+    public function update(SaleSetPaymentMethod $request, Sale $sale)
     {
-        $this->saleService->setModel($sale);
-        $this->saleService->update($request->validated());
-        return redirect()->route('sale.edit', [$sale]);
+        if ($sale->status == __("Opened")) {
+            $this->saleService->setModel($sale);
+            $this->saleService->update($request->validated());
+            return redirect()->route('sale.edit', [$sale]);
+        } else {
+            return redirect()->route('sale.index');
+        }
     }
 
     /**

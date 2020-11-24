@@ -16,6 +16,7 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->string('method');
+            $table->boolean('can_have_change');
             $table->timestamps();
         });
     }

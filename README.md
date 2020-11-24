@@ -57,3 +57,4 @@ php artisan serve
 * php artisan make:request SaleCreate
 * php artisan make:controller SaleProductController --resource --model=SaleProduct
 * php artisan make:request SaleProduct
+* php artisan make:request SaleSetPaymentMethod
