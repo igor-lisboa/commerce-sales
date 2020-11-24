@@ -21,6 +21,6 @@
 </form>
 @if($client??null)        
 <hr>
-@include('partials.complaint.index',['complaints'=>$client->complaints()->paginate(2),'client_id'=>$client->id])
+@include('partials.complaint.index',['complaints'=>$client->complaints()->paginate(5),'client_id'=>$client->id])
 @endif
 @endsection

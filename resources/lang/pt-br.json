@@ -36,7 +36,13 @@
     "Cash": "Espécie",
     "Credit Card": "Cartão de Crédito",
     "Debit Card": "Cartão de Débito",
-    "Canceled": "Cancelado",
+    "Canceled": "Cancelada",
     "Finished": "Finalizado",
-    "Opened": "Em Aberto"
+    "Opened": "Em Aberto",
+    "sale_client_id_required": "Por favor informe o cliente dessa venda.",
+    "sale_msg_confirm_cancel": "Tem certeza que deseja cancelar a venda do cliente :client iniciada em :created_at?",
+    "sale_product_msg_product_id_required": "Informar o ID do Produto é obrigatório.",
+    "sale_product_msg_quantity_required": "Informar a Quantidade na lista de Produtos da Venda é obrigatório",
+    "sale_product_msg_confirm_destroy": "Tem certeza que deseja remover o produto :product da lista?",
+    "Payment method chosen": "Método de Pagamento escolhido"
 }

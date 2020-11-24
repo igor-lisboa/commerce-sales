@@ -53,4 +53,7 @@ php artisan serve
 * php artisan make:controller SaleController --resource --model=Sale
 * php artisan make:model PaymentMethod -m
 * php artisan make:seeder PaymentMethodSeeder
-* php artisan make:model SaleProducts -m
+* php artisan make:model SaleProduct -m
+* php artisan make:request SaleCreate
+* php artisan make:controller SaleProductController --resource --model=SaleProduct
+* php artisan make:request SaleProduct

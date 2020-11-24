@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Sale;
 
-class ProductService extends BaseService
+class SaleService extends BaseService
 {
     /**
      * 

@@ -5,6 +5,8 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SaleProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,9 @@ Route::post('change-password/{token}', [UserController::class, "updatePassword"]
 
 Route::middleware(['authenticator'])->group(function () {
     Route::resource('complaint', ComplaintController::class);
+    Route::resource('sale', SaleController::class);
+    Route::resource('sale.sale-product', SaleProductController::class)->shallow();
+
     Route::get('your-user', [UserController::class, "editUser"])->name('your_user');
     Route::post('logout', [UserController::class, "logout"])->name('logout');
     Route::get('home', [HomeController::class, "home"])->name('home');

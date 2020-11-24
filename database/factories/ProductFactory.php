@@ -24,7 +24,7 @@ class ProductFactory extends Factory
         $promotion_price = $this->faker->randomNumber() / 100;
         $price = $this->faker->randomNumber() / 100;
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->word,
             'bar_code' => strval($this->faker->isbn13),
             'provider' => $this->faker->company(),
             'price_cents' => $price,

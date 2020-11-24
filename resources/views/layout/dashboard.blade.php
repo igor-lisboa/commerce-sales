@@ -27,6 +27,9 @@
                     <li class="nav-item <?= (request()->routeIs('home') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('home') ?>">Home</a>
                     </li>
+                    <li class="nav-item <?= (request()->routeIs('sale.index') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('sale.index') ?>">Vendas</a>
+                    </li>
                     <li class="nav-item <?= (request()->routeIs('client.index') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('client.index') ?>">Clientes</a>
                     </li>

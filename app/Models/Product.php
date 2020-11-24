@@ -33,15 +33,15 @@ class Product extends Model
         return $this->stock()->select(DB::raw('sum(input) - sum(output) as stock'))->pluck('stock')[0] ?? 0;
     }
 
-    public function getPriceCentsAttribute($value)
+    public function getPriceAttribute()
     {
-        return number_format($value / 100, 2, '.', '');
+        return number_format($this->price_cents / 100, 2, '.', '');
     }
 
-    public function getPriceCentsPromotionAttribute($value)
+    public function getPricePromotionAttribute()
     {
-        if ($value != null) {
-            return number_format($value / 100, 2, '.', '');
+        if ($this->price_cents_promotion != null) {
+            return number_format($this->price_cents_promotion / 100, 2, '.', '');
         } else {
             return null;
         }

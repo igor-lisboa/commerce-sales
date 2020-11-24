@@ -15,6 +15,7 @@ class CreateSaleProductsTable extends Migration
     {
         Schema::create('sale_products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sale_id')->references('id')->on('sales');
             $table->foreignId('product_id')->references('id')->on('products');
             $table->bigInteger('price_cents');
             $table->bigInteger('quantity');

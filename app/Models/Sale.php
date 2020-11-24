@@ -24,6 +24,21 @@ class Sale extends Model
         'change_paid_cents'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo('\App\Models\Client');
+    }
+
+    public function method()
+    {
+        return $this->belongsTo('\App\Models\PaymentMethod');
+    }
+
     public function getStatusAttribute()
     {
         if ($this->canceled) {
@@ -32,7 +47,11 @@ class Sale extends Model
             if ($this->amount_paid_cents) {
                 return __("Finished");
             } else {
-                return __("Opened");
+                if ($this->payment_method_id) {
+                    return __("Payment method chosen");
+                } else {
+                    return __("Opened");
+                }
             }
         }
     }
@@ -40,6 +59,11 @@ class Sale extends Model
     public function getTotalAmountCentsAttribute()
     {
         return $this->products()->select(DB::raw('sum(price_cents * quantity) as total'))->pluck('total')[0] ?? 0;
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        return number_format($this->total_amount_cents / 100, 2, '.', '');
     }
 
     public function getChangeCentsAttribute()
@@ -54,6 +78,6 @@ class Sale extends Model
 
     public function products()
     {
-        return $this->hasMany('\App\Models\SaleProducts');
+        return $this->hasMany('\App\Models\SaleProduct');
     }
 }

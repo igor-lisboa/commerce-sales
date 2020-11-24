@@ -18,8 +18,8 @@
         <tr>
             <td>{{ $product->id }}</td>
             <td>{{$product->name}}</td>
-            <td>{{ $product->price_cents }}</td>
-            <td>{{ ($product->price_cents_promotion ? $product->price_cents_promotion : '') }}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ ($product->price_promotion ? $product->price_promotion : '') }}</td>
             <td>{{$product->balance}}</td>
             <td>{{$product->provider}}</td>
             <td>
