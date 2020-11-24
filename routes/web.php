@@ -36,6 +36,8 @@ Route::post('change-password/{token}', [UserController::class, "updatePassword"]
 Route::middleware(['authenticator'])->group(function () {
     Route::resource('complaint', ComplaintController::class);
     Route::resource('sale', SaleController::class);
+    Route::get('sale/{sale}/confirm', [SaleController::class, "confirm"])->name('sale_confirm');
+    Route::post('sale/{sale}/pay', [SaleController::class, "pay"])->name('sale_pay');
     Route::resource('sale.sale-product', SaleProductController::class)->shallow();
 
     Route::get('your-user', [UserController::class, "editUser"])->name('your_user');

@@ -38,7 +38,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('sale.form', ['clients' => Client::orderBy('cpf')->get()]);
+        return view('sale.create', ['clients' => Client::orderBy('cpf')->get()]);
     }
 
     /**
@@ -63,14 +63,19 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        if ($sale->status == __("Opened")) {
-            return view('sale.form', ['sale' => $sale, 'products' => Product::whereNotIn('id', $sale->products()->pluck('product_id'))->get(), 'paymentMethods' => PaymentMethod::get()]);
+        if ($sale->status == __("Opened") || $sale->status == __("Payment method chosen")) {
+            return view('sale.edit', ['sale' => $sale, 'products' => Product::whereNotIn('id', $sale->products()->pluck('product_id'))->get(), 'paymentMethods' => PaymentMethod::get()]);
         } else {
-            if ($sale->status == __("Payment method chosen")) {
-                return "x";
-            } else {
-                return redirect()->route('sale.index');
-            }
+            return redirect()->route('sale.index');
+        }
+    }
+
+    public function confirm(Sale $sale)
+    {
+        if ($sale->status == __("Payment method chosen")) {
+            return view('sale.confirm', ['sale' => $sale]);
+        } else {
+            return redirect()->route('sale.index');
         }
     }
 
@@ -83,10 +88,10 @@ class SaleController extends Controller
      */
     public function update(SaleSetPaymentMethod $request, Sale $sale)
     {
-        if ($sale->status == __("Opened")) {
+        if ($sale->status == __("Opened") || $sale->status == __("Payment method chosen")) {
             $this->saleService->setModel($sale);
             $this->saleService->update($request->validated());
-            return redirect()->route('sale.edit', [$sale]);
+            return redirect()->route('sale_confirm', [$sale]);
         } else {
             return redirect()->route('sale.index');
         }

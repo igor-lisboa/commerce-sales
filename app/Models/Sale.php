@@ -21,7 +21,7 @@ class Sale extends Model
         'payment_method_id',
         'canceled',
         'amount_paid_cents',
-        'change_paid_cents'
+        'used_points'
     ];
 
     public function user()
@@ -34,7 +34,7 @@ class Sale extends Model
         return $this->belongsTo('\App\Models\Client');
     }
 
-    public function method()
+    public function payment_method()
     {
         return $this->belongsTo('\App\Models\PaymentMethod');
     }
@@ -74,6 +74,11 @@ class Sale extends Model
     public function getTotalDueCentsAttribute()
     {
         return $this->getTotalAmountCentsAttribute() - $this->used_points;
+    }
+
+    public function getTotalDueAttribute()
+    {
+        return number_format($this->total_due_cents / 100, 2, '.', '');
     }
 
     public function products()

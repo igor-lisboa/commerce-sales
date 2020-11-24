@@ -20,13 +20,13 @@
             <td>{{ $sale->id }}</td>
             <td>{{$sale->user->name}}</td>
             <td>{{$sale->client->name}}</td>
-            <td>{{ ($sale->method?$sale->method->method:'-') }}</td>
+            <td>{{ ($sale->payment_method?$sale->payment_method->method:'-') }}</td>
             <td>{{$sale->total_amount}}</td>
             <td>{{$sale->status}}</td>
             <td>{{$sale->created_at}}</td>
             <td>
                 <div class="d-flex">
-                    @if($sale->status==__("Opened"))
+                    @if($sale->status==__("Opened") || $sale->status == __("Payment method chosen"))
                     @if(auth()->user()->manager)
                     <form action="<?= route('sale.destroy', [$sale]) ?>" method="POST">
                         @method('DELETE')
