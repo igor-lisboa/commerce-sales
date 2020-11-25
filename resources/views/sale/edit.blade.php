@@ -1,7 +1,7 @@
 @extends('layout.dashboard')
 
 @section('content')
-<h4>Cliente: {{$sale->client->cpf}} | {{$sale->client->name}} {{ ($sale->client->preferential ? '(Preferencial)':'') }}</h4>
+<h4>Cliente: {{$sale->client->cpf}} | {{$sale->client->name}} {{ ($sale->client->preferential ? '(Preferencial)':'') }} [{{$sale->client->total_points}} Pontos Disponíveis]</h4>
 <hr>
 <h2>Produtos da Venda</h2>
 <table>
@@ -74,7 +74,7 @@
             @endforeach
         </select>
         @if($sale->client->preferential)
-        <input type="number" name="used_points" placeholder="Pontos que serão usados" max="{{$sale->total_amount_cents}}" min="1" value="<?= old('used_points') ?? ($sale->used_points ?? '') ?>" />
+        <input type="number" name="used_points" placeholder="Pontos que serão usados" max="{{ min($sale->total_amount_cents,$sale->client->total_points) }}" min="0" value="<?= old('used_points') ?? ($sale->used_points ?? '') ?>" />
         <small>Cada ponto equivale a 1 centavo (R$0.01)</small>
         @endif
         <button type="submit" onclick="return confirm('<?= __('msg_confirm_finish_sale', ['total' => $sale->total_amount]) ?>')">Finalizar</button>

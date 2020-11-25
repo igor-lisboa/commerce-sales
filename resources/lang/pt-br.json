@@ -47,6 +47,7 @@
     "Payment method chosen": "Método de Pagamento escolhido",
     "msg_confirm_finish_sale": "Tem certeza que deseja finalizar essa Venda, com um subtotal de R$:total?",
     "sale_msg_payment_method_id": "Informar o método de pagamento é obrigatório.",
-    "sale_msg_used_points": "Informe a pontuação a ser usada na compra com um número superior a 0.",
-    "msg_product_stock_balance_exception": "Operação inválida, não temos a quantidade desejada do produto :product no momento."
+    "sale_msg_used_points": "Informe a pontuação a ser usada na compra com um número superior ou igual a 0.",
+    "msg_product_stock_balance_exception": "Operação inválida, não temos a quantidade desejada do produto :product no momento.",
+    "msg_invalid_used_points": "Por favor reduza a quantidade de pontos usados pois essa quantidade não está disponível para o cliente selecionado."
 }

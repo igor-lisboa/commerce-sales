@@ -12,6 +12,7 @@
             <th>E-Mail</th>
             <th>Preferêncial</th>
             <th>Reclamações</th>
+            <th>Pontos</th>
             <th>Opções</th>
         </tr>
     </thead>
@@ -26,6 +27,7 @@
             <td>{{$client->email}}</td>
             <td>{{ ($client->preferential ? 'Sim' : 'Não') }}</td>
             <td>{{$client->complaints()->count()}}</td>
+            <td>{{$client->total_points}}</td>
             <td>
                 <div class="d-flex">
                     <form action="<?= route('client.destroy', [$client]) ?>" method="POST">

@@ -136,12 +136,19 @@ class SaleController extends Controller
      */
     public function update(SaleSetPaymentMethod $request, Sale $sale)
     {
-        if ($sale->status == __("Opened") || $sale->status == __("Payment method chosen")) {
-            $this->saleService->setModel($sale);
-            $this->saleService->update($request->validated());
-            return redirect()->route('sale_confirm', [$sale]);
-        } else {
-            return redirect()->route('sale.index');
+        try {
+            if ($sale->status == __("Opened") || $sale->status == __("Payment method chosen")) {
+                if ($request->used_points > $sale->client->total_points) {
+                    throw new Exception(__('msg_invalid_used_points'));
+                }
+                $this->saleService->setModel($sale);
+                $this->saleService->update($request->validated());
+                return redirect()->route('sale_confirm', [$sale]);
+            } else {
+                return redirect()->route('sale.index');
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 

@@ -18,7 +18,7 @@ class SaleSetPaymentMethod extends FormRequest
                 'required'
             ],
             'used_points' => [
-                'min:1',
+                'min:0',
                 'numeric',
                 'nullable'
             ]
