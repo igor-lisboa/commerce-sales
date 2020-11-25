@@ -16,8 +16,8 @@ class CreateProductStocksTable extends Migration
         Schema::create('product_stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('input')->default(0);
-            $table->integer('output')->default(0);
+            $table->bigInteger('input')->default(0);
+            $table->bigInteger('output')->default(0);
             $table->timestamps();
         });
     }

@@ -68,7 +68,22 @@ class Sale extends Model
 
     public function getChangeCentsAttribute()
     {
-        return $this->amount_paid_cents - $this->getTotalDueCentsAttribute();
+        $changeCents = $this->amount_paid_cents - $this->getTotalDueCentsAttribute();
+        if ($changeCents > 0) {
+            return $changeCents;
+        } else {
+            return 0;
+        }
+    }
+
+    public function getAmountPaidAttribute()
+    {
+        return number_format($this->amount_paid_cents / 100, 2, '.', '');
+    }
+
+    public function getChangeAttribute()
+    {
+        return number_format($this->getChangeCentsAttribute() / 100, 2, '.', '');
     }
 
     public function getTotalDueCentsAttribute()

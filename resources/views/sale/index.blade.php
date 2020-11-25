@@ -9,6 +9,9 @@
             <th>Cliente</th>
             <th>Método de Pagamento</th>
             <th>Total da Venda (R$)</th>
+            <th>Pontos Usados</th>
+            <th>Total Pago (R$)</th>
+            <th>Troco Dado (R$)</th>
             <th>Status</th>
             <th>Iniciada em</th>
             <th>Opções</th>
@@ -22,6 +25,9 @@
             <td>{{$sale->client->name}}</td>
             <td>{{ ($sale->payment_method?$sale->payment_method->method:'-') }}</td>
             <td>{{$sale->total_amount}}</td>
+            <td>{{$sale->used_points}}</td>
+            <td>{{$sale->amount_paid}}</td>
+            <td>{{$sale->change}}</td>
             <td>{{$sale->status}}</td>
             <td>{{$sale->created_at}}</td>
             <td>

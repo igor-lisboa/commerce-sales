@@ -19,4 +19,9 @@ class ProductStock extends Model
         'input',
         'output',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo('\App\Models\Product');
+    }
 }

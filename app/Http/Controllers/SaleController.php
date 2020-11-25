@@ -7,9 +7,12 @@ use App\Http\Requests\SaleSetPaymentMethod;
 use App\Models\Client;
 use App\Models\PaymentMethod;
 use App\Models\Product;
+use App\Models\ProductStock;
 use App\Models\Sale;
 use App\Services\SaleService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -74,6 +77,51 @@ class SaleController extends Controller
     {
         if ($sale->status == __("Payment method chosen")) {
             return view('sale.confirm', ['sale' => $sale]);
+        } else {
+            return redirect()->route('sale.index');
+        }
+    }
+
+    public function pay(Request $request, Sale $sale)
+    {
+        if ($sale->status == __("Payment method chosen")) {
+            $amountPaidCents = 0;
+            if ($sale->payment_method->can_have_change) {
+                $amountPaidCents = $request->amount_paid_cents * 100;
+            } else {
+                $amountPaidCents = $sale->total_due_cents;
+            }
+            try {
+                DB::beginTransaction();
+                foreach ($sale->products as $saleProduct) {
+                    $productStock = ProductStock::create([
+                        'product_id' => $saleProduct->product_id,
+                        'output' => $saleProduct->quantity,
+                    ]);
+                    if ($productStock->product->balance < 0) {
+                        throw new Exception(__('msg_product_stock_balance_exception', ['product' => $productStock->product->name]));
+                    }
+                }
+                $sale->update(['amount_paid_cents' => $amountPaidCents]);
+                DB::commit();
+                if ($sale->change_cents > 0) {
+                    return redirect()->route('sale_change', [$sale]);
+                } else {
+                    return redirect()->route('sale.index');
+                }
+            } catch (Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->withErrors($e->getMessage())->withInput();
+            }
+        } else {
+            return redirect()->route('sale.index');
+        }
+    }
+
+    public function change(Sale $sale)
+    {
+        if ($sale->status == __("Finished")) {
+            return view('sale.change', ['sale' => $sale]);
         } else {
             return redirect()->route('sale.index');
         }

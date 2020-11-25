@@ -37,6 +37,7 @@ Route::middleware(['authenticator'])->group(function () {
     Route::resource('complaint', ComplaintController::class);
     Route::resource('sale', SaleController::class);
     Route::get('sale/{sale}/confirm', [SaleController::class, "confirm"])->name('sale_confirm');
+    Route::get('sale/{sale}/change', [SaleController::class, "change"])->name('sale_change');
     Route::post('sale/{sale}/pay', [SaleController::class, "pay"])->name('sale_pay');
     Route::resource('sale.sale-product', SaleProductController::class)->shallow();
 

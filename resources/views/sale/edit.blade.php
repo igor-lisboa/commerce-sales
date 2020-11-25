@@ -10,7 +10,8 @@
             <th></th>
             <th>Produto</th>
             <th>Preço Unitário (R$)</th>
-            <th>Quantidade</th>
+            <th>Quantidade Desejada</th>
+            <th>Quantidade em Estoque</th>
             <th>Total (R$)</th>
             <th>Opções</th>
         </tr>
@@ -22,6 +23,7 @@
             <td>{{ $saleProduct->product->name }}</td>
             <td>{{ $saleProduct->price }}</td>
             <td>{{ $saleProduct->quantity }}</td>
+            <td>{{ $saleProduct->product->balance }}</td>
             <td>{{ $saleProduct->total_price }}</td>
             <td>
                 <div class="d-flex">
@@ -34,7 +36,7 @@
                     <form method="POST" action="<?= route('sale-product.update', [$saleProduct, 'sale' => $sale]) ?>">
                         @csrf
                         @method('PUT')
-                        <input type="number" name="quantity" placeholder="Nova Quantidade" required min="1" />
+                        <input type="number" name="quantity" placeholder="Nova Quantidade" required min="1" max="{{$saleProduct->product->balance}}" />
                         <button type="submit">Atualizar Quantidade do Produto</button>
                     </form>
                     @endif
@@ -72,7 +74,7 @@
             @endforeach
         </select>
         @if($sale->client->preferential)
-        <input type="number" name="used_points" placeholder="Pontos que serão usados" min="1" value="<?= old('used_points') ?? ($sale->used_points ?? '') ?>" />
+        <input type="number" name="used_points" placeholder="Pontos que serão usados" max="{{$sale->total_amount_cents}}" min="1" value="<?= old('used_points') ?? ($sale->used_points ?? '') ?>" />
         <small>Cada ponto equivale a 1 centavo (R$0.01)</small>
         @endif
         <button type="submit" onclick="return confirm('<?= __('msg_confirm_finish_sale', ['total' => $sale->total_amount]) ?>')">Finalizar</button>

@@ -9,9 +9,6 @@
 @endif
 <h1>Total: R${{$sale->total_due}}</h1>
 <h4>Método de Pagamento Escolhido: {{$sale->payment_method->method}}</h4>
-@if($sale->payment_method->can_have_change)
-<input type="number" name="amount_paid_cents" step="0.01" min="{{$sale->total_due}}" placeholder="Valor Pago (R$)" />
-@endif
 <hr>
 <small>Algo errado ou faltando na Venda?</small>
 <button type="button" onclick="window.location.replace('<?= route('sale.edit', [$sale]) ?>')">Editar Venda</button>
@@ -52,6 +49,9 @@
 <hr>
 <form method="POST" action="<?= route('sale_pay', [$sale]) ?>">
     @csrf
+    @if($sale->payment_method->can_have_change)
+    <input type="number" name="amount_paid_cents" step="0.01" min="{{$sale->total_due}}" placeholder="Valor Pago (R$)" />
+    @endif
     <button type="submit">Confirmar pagamento</button>
 </form>
 @endsection
