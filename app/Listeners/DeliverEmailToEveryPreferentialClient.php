@@ -3,15 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\SendPromotionToPreferentialClients;
+use App\Jobs\SendEmail;
 use App\Mail\ProductsInPromotion;
 use App\Models\Client;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Mail;
 
 class DeliverEmailToEveryPreferentialClient
 {
-    use InteractsWithQueue, ShouldQueue;
+    use InteractsWithQueue;
 
     private $clients;
 
@@ -35,7 +34,8 @@ class DeliverEmailToEveryPreferentialClient
     {
         foreach ($this->clients as $client) {
             $email = new ProductsInPromotion($client);
-            Mail::send($email);
+            $emailJob = new SendEmail($email);
+            dispatch_now($emailJob);
         }
     }
 }

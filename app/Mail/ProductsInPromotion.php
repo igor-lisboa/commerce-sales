@@ -5,13 +5,12 @@ namespace App\Mail;
 use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 class ProductsInPromotion extends Mailable
 {
-    use Queueable, SerializesModels, ShouldQueue;
+    use Queueable, SerializesModels;
 
     private $client;
 
