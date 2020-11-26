@@ -16,4 +16,5 @@
     </fieldset>
 </form>
 <a href="<?= route('set_user_change_password') ?>">Esqueci minha senha</a>
+@include('info')
 @endsection
