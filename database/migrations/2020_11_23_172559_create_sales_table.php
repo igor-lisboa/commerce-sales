@@ -21,6 +21,10 @@ class CreateSalesTable extends Migration
             $table->boolean('canceled')->default(false);
             $table->bigInteger('amount_paid_cents')->nullable();
             $table->bigInteger('used_points')->default(0);
+            $table->string('client_email')->nullable();
+            $table->string('client_cpf')->nullable();
+            $table->string('client_identity')->nullable();
+            $table->string('client_address')->nullable();
             $table->timestamps();
         });
     }

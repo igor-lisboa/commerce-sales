@@ -5,6 +5,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductExchangeController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleProductController;
 use App\Http\Controllers\UserController;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Route::get('login', [UserController::class, "login"])->name('login');
@@ -37,9 +38,11 @@ Route::middleware(['authenticator'])->group(function () {
     Route::resource('complaint', ComplaintController::class);
     Route::resource('sale', SaleController::class);
     Route::get('sale/{sale}/confirm', [SaleController::class, "confirm"])->name('sale_confirm');
+    Route::get('sale/{sale}/invoice', [SaleController::class, "downloadInvoice"])->name('sale_invoice');
     Route::get('sale/{sale}/change', [SaleController::class, "change"])->name('sale_change');
     Route::post('sale/{sale}/pay', [SaleController::class, "pay"])->name('sale_pay');
     Route::resource('sale.sale-product', SaleProductController::class)->shallow();
+    Route::resource('product-exchange', ProductExchangeController::class);
 
     Route::get('your-user', [UserController::class, "editUser"])->name('your_user');
     Route::post('logout', [UserController::class, "logout"])->name('logout');

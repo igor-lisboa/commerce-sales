@@ -36,6 +36,9 @@
                     <li class="nav-item <?= (request()->routeIs('complaint.index') ? 'active' : '')  ?>">
                         <a class="nav-link" href="<?= route('complaint.index') ?>">Reclamações</a>
                     </li>
+                    <li class="nav-item <?= (request()->routeIs('product-exchange.index') ? 'active' : '')  ?>">
+                        <a class="nav-link" href="<?= route('product-exchange.index') ?>">Troca de Produtos</a>
+                    </li>
                     @auth
                     @if(auth()->user()->manager)
                     <li class="nav-item <?= (request()->routeIs('manager.index') ? 'active' : '')  ?>">
@@ -83,11 +86,6 @@
         </div>
         @endif
         @yield('content')
-        <!-- FOOTER -->
-        <footer class="container">
-            <p class="float-right"><a href="#">Back to top</a></p>
-            <p>© 2017-2020 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-        </footer>
     </main>
 
     <!-- Scripts -->

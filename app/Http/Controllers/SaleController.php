@@ -91,6 +91,7 @@ class SaleController extends Controller
             } else {
                 $amountPaidCents = $sale->total_due_cents;
             }
+
             try {
                 DB::beginTransaction();
                 foreach ($sale->products as $saleProduct) {
@@ -102,13 +103,15 @@ class SaleController extends Controller
                         throw new Exception(__('msg_product_stock_balance_exception', ['product' => $productStock->product->name]));
                     }
                 }
-                $sale->update(['amount_paid_cents' => $amountPaidCents]);
+                $sale->update([
+                    'amount_paid_cents' => $amountPaidCents,
+                    'client_email' => $sale->client->email,
+                    'client_cpf' => $sale->client->cpf,
+                    'client_identity' => $sale->client->identity,
+                    'client_address' => $sale->client->address,
+                ]);
                 DB::commit();
-                if ($sale->change_cents > 0) {
-                    return redirect()->route('sale_change', [$sale]);
-                } else {
-                    return redirect()->route('sale.index');
-                }
+                return redirect()->route('sale.show', [$sale]);
             } catch (Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->withErrors($e->getMessage())->withInput();
@@ -116,6 +119,19 @@ class SaleController extends Controller
         } else {
             return redirect()->route('sale.index');
         }
+    }
+
+    public function invoice(Sale $sale)
+    {
+        return view('sale.invoice', ['sale' => $sale]);
+    }
+
+    public function downloadInvoice(Sale $sale)
+    {
+        $filename = 'nota-fiscal.html';
+        $tempFile = tempnam(sys_get_temp_dir(), $filename);
+        file_put_contents($tempFile, $this->invoice($sale));
+        return response()->download($tempFile, $filename);
     }
 
     public function change(Sale $sale)
