@@ -8,6 +8,10 @@
 ```sh
 cp .env.example .env
 ```
+* instale as dependências do composer
+```sh
+composer install
+```
 * verifique as credenciais de acesso ao banco de dados usada e rode o comando abaixo
 ```sh
 php artisan migrate:fresh --seed
