@@ -53,7 +53,13 @@
     @endforeach
 </table>
 <hr>
-<h1>TOTAL: R${{$sale->total_amount}}</h1>
+@if($sale->used_points!=0)
+<h2>Subtotal: R${{$sale->total_amount}}</h2>
+<h3>Pontos usados: {{$sale->used_points}}</h3>
+<hr>
+@endif
+<h1>Total: R${{$sale->total_due}}</h1>
+<h4>Método de Pagamento Escolhido: {{$sale->payment_method->method}}</h4>
 <hr>
 <table>
     <tr>
