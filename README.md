@@ -20,3 +20,7 @@ php artisan migrate:fresh --seed
 ```sh
 php artisan serve
 ```
+* rode o comando abaixo para iniciar o schedule que enviará o email para os clientes preferênciais a cada 2 meses
+```sh
+php artisan schedule:work
+```
