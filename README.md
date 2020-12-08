@@ -1,3 +1,6 @@
+# Documentos do projeto
+* Estão na pasta arquivos_trabalho
+
 # Para rodar o projeto voce precisa ter:
 * [composer](https://getcomposer.org/)
 * [php](https://www.php.net/)
