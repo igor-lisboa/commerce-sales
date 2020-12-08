@@ -6,7 +6,7 @@
 * [https://github.com/igor-lisboa/commerce-sales/blob/main/arquivos_trabalho/Trabalho%20Final%20PS.pdf](https://github.com/igor-lisboa/commerce-sales/blob/main/arquivos_trabalho/Trabalho%20Final%20PS.pdf)
 
 # O deploy do trabalho feito no heroku
-* [commercesales.herokuapp.com](http://commercesales.herokuapp.com/login)
+* [commercesales.herokuapp.com](http://commercesales.herokuapp.com)
 
 ## Deixamos 2 Logins para o uso do professor
 ### Nome: Professor (Caixa)
