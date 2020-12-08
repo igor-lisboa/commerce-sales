@@ -1,6 +1,6 @@
 # Documentos do projeto
 * Estão na pasta [/arquivos_trabalho](https://github.com/igor-lisboa/commerce-sales/tree/main/arquivos_trabalho)
-* Mas também podem ser encontrados do [Google Drive](https://drive.google.com/drive/folders/1VbdfnAtDPqReQlx2Qnu7xCf6Et_zDrnx?usp=sharing)
+* Mas também podem ser encontrados no [Google Drive](https://drive.google.com/drive/folders/1VbdfnAtDPqReQlx2Qnu7xCf6Et_zDrnx?usp=sharing)
 
 # O documento do trabalho final de Projeto de Software pode ser encontrado em:
 * [https://github.com/igor-lisboa/commerce-sales/blob/main/arquivos_trabalho/Trabalho%20Final%20PS.pdf](https://github.com/igor-lisboa/commerce-sales/blob/main/arquivos_trabalho/Trabalho%20Final%20PS.pdf)
